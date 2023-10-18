@@ -4,7 +4,7 @@ const TopMenuData = [
     url: "/",
   },
   {
-    section: "Search of a cocktail",
+    section: "Find a cocktail",
     elements: [
       {
         subSection: "...by name",

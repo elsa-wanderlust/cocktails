@@ -1,7 +1,7 @@
 // import Image from "next/image";
 import DailyCocktail from "@/components/DailyCocktail";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <DailyCocktail />

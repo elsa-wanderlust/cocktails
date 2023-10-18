@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { useState } from "react";
 import TopMenuSecondaryTitle from "./TopMenuSecondaryTitle";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-} from "@nextui-org/react";
+// import {
+//   Dropdown,
+//   DropdownTrigger,
+//   DropdownMenu,
+//   DropdownItem,
+//   Button,
+// } from "@nextui-org/react"; // ELSA REMOVE PKG
 
-type OneMenuTitle = {
+type PropsType = {
   info: {
     section: string;
     url?: string;
@@ -18,21 +18,19 @@ type OneMenuTitle = {
       url?: string;
     }[];
   };
+  dropMenuVisible: boolean;
+  setDropMenuVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const TopMenuTitle = ({ info }: OneMenuTitle) => {
-  const [dropMenuVisible, setdropMenuVisible] = useState(false);
-
-  const openCloseMenu = () => {
-    console.log("clicked");
-    setdropMenuVisible(!dropMenuVisible);
-  };
-
+const TopMenuTitle = ({
+  info,
+  dropMenuVisible,
+  setDropMenuVisible,
+}: PropsType) => {
+  const openCloseMenu = () => setDropMenuVisible(!dropMenuVisible);
   const closeMenu = () => {
-    console.log("@@close menu called");
     if (dropMenuVisible) {
-      console.log("@@close menu called2");
-      setdropMenuVisible(false);
+      setDropMenuVisible(false);
     }
   };
 
@@ -43,18 +41,20 @@ const TopMenuTitle = ({ info }: OneMenuTitle) => {
   ) : (
     <div>
       <p onClick={openCloseMenu}>{info.section}</p>
-      {dropMenuVisible &&
-        info.elements &&
-        info.elements.map((item) => {
-          return (
-            item.url &&
-            item.subSection && (
-              <Link key={item.subSection} href={item.url} onClick={closeMenu}>
-                {item.subSection}
-              </Link>
-            )
-          );
-        })}
+      <div className="flex flex-col gap-5">
+        {dropMenuVisible &&
+          info.elements &&
+          info.elements.map((item) => {
+            return (
+              item.url &&
+              item.subSection && (
+                <Link key={item.subSection} href={item.url} onClick={closeMenu}>
+                  {item.subSection}
+                </Link>
+              )
+            );
+          })}
+      </div>
     </div>
   );
 };
