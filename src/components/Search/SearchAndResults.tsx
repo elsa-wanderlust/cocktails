@@ -93,7 +93,7 @@ const SearchAndResults = ({ searchPage }: searchTypeProps) => {
         <div>
           <p>we have found {data.length} cocktails</p>
           {data.map((item, index) => {
-            return <Cocktail key={index} info={item} />;
+            return <Cocktail key={index} info={item} searchPage={searchPage} />;
           })}
         </div>
       )}

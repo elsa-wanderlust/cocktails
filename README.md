@@ -1,3 +1,15 @@
+- see-through menu
+- timing for research (not because of letters)
+- can untick and display none when searching by glass or category
+- at when loading / no result found
+- timing for cocktail of the day
+- set up error page and 404 page
+- paging system
+- search in URL
+- login/sign up
+- favorite/hate/to try
+- note for each
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

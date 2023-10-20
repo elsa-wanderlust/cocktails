@@ -57,9 +57,10 @@ type CocktailProps = {
     strCreativeCommonsConfirmed?: string;
     dateModified?: string;
   };
+  searchPage: string;
 };
 
-const Cocktail = ({ info }: CocktailProps) => {
+const Cocktail = ({ info, searchPage }: CocktailProps) => {
   const ingredientsList = handleIngredients(info);
   return (
     <div>
@@ -72,9 +73,10 @@ const Cocktail = ({ info }: CocktailProps) => {
           width="100px"
         />
       )}
-      {ingredientsList.map((item, index) => {
-        return <Ingredient key={index} info={item} />;
-      })}
+      {searchPage === "h" &&
+        ingredientsList.map((item, index) => {
+          return <Ingredient key={index} info={item} />;
+        })}
     </div>
   );
 };
