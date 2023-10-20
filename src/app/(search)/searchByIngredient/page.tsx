@@ -1,10 +1,10 @@
-import SearchField from "@/components/Search/SearchField";
+import SearchAndResults from "@/components/Search/SearchAndResults";
 
 const SearchByIngredient = () => {
   return (
     <div>
       <p>Search by ingredient page</p>
-      <SearchField searchPage="i" />
+      <SearchAndResults searchPage="i" />
     </div>
   );
 };

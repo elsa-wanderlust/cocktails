@@ -1,10 +1,10 @@
-import SearchField from "@/components/Search/SearchField";
+import SearchAndResults from "@/components/Search/SearchAndResults";
 
 const SearchByName = () => {
   return (
     <div>
       <p>Search by name page</p>
-      <SearchField searchPage="s" />
+      <SearchAndResults searchPage="s" />
     </div>
   );
 };

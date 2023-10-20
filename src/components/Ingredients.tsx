@@ -3,7 +3,6 @@ type oneIngredient = {
 };
 
 const Ingredient = ({ info }: oneIngredient) => {
-  // console.log("-----ingredient", info);
   return (
     <div>
       <p>{info}</p>

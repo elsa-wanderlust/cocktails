@@ -60,8 +60,6 @@ type CocktailProps = {
 };
 
 const Cocktail = ({ info }: CocktailProps) => {
-  // console.log(info);
-
   const ingredientsList = handleIngredients(info);
   return (
     <div>
@@ -75,7 +73,6 @@ const Cocktail = ({ info }: CocktailProps) => {
         />
       )}
       {ingredientsList.map((item, index) => {
-        // console.log("-----item", item);
         return <Ingredient key={index} info={item} />;
       })}
     </div>

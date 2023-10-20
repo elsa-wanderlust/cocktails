@@ -3,11 +3,6 @@ import { useState } from "react";
 // import routes
 import fetchresults from "@/app/api/route";
 
-type Input = {
-  target: {
-    value: string;
-  };
-};
 type CocktailProps = {
   idDrink: string;
   strDrink: string;
@@ -62,57 +57,70 @@ type CocktailProps = {
   dateModified?: string;
 };
 
-type SearchFieldProps = {
+type CheckboxesProps = {
+  data: string[];
   searchPage: string;
   // isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setData: React.Dispatch<React.SetStateAction<CocktailProps[]>>;
 };
+type Select = {
+  target: {
+    name: string;
+  };
+};
 
-const SearchField = ({
+const Checkboxes = ({
+  data,
   searchPage,
   // isLoading,
   setIsLoading,
   setData,
-}: SearchFieldProps) => {
-  // declare states
-  const [input, setInput] = useState("");
+}: CheckboxesProps) => {
+  const [selection, setSelection] = useState("");
 
-  const handleInput = async (input: Input) => {
-    if (input.target) {
-      setInput(input.target.value);
-      if (input.target.value.length > 2) {
-        setIsLoading(true);
-        const cocktailsFound = await fetchresults(
-          input.target.value,
-          searchPage
-        );
-        if (cocktailsFound) {
-          setData(cocktailsFound);
-          setIsLoading(false);
-        }
-      }
+  const handleSelect = async (select: Select) => {
+    setSelection(select.target.name);
+    setIsLoading(true);
+    const searchGlassFormatted = select.target.name.replace(" ", "_");
+    const cocktailsFound = await fetchresults(searchGlassFormatted, searchPage);
+    if (cocktailsFound) {
+      setData(cocktailsFound);
+      setIsLoading(false);
     }
   };
 
-  // declare variables
-  const searchKeyWords = {
-    s: "the name of a cocktail",
-    i: "the name of an ingredient",
-    c: "a category cocktail",
-    g: "a type of cocktail glass",
-  };
-
   return (
-    <div className="h-80%">
-      <input
-        type="text"
-        placeholder="start typing"
-        onChange={handleInput}
-        value={input}
-      />
-    </div>
+    <fieldset className="">
+      <legend className="text-base font-semibold leading-6 text-gray-900 py-4">
+        Select at least one type of cocktail glass
+      </legend>
+      <div className=" border-t border-red-200 border-2 flex flex-wrap gap-10 pb-4">
+        {data.map((glass) => (
+          <div key={glass} className="relative flex items-start pb-2 w-1/6">
+            <div className="min-w-0 flex-1 text-sm leading-6">
+              <label
+                htmlFor={glass}
+                className="select-none font-medium text-gray-900"
+              >
+                {glass}
+              </label>
+            </div>
+            <div className="ml-3 flex h-6 items-center">
+              <input
+                id={glass}
+                name={glass}
+                type="checkbox"
+                className="h-4 w-4"
+                onChange={handleSelect}
+                checked={selection === glass ? true : false}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </fieldset>
   );
 };
 
-export default SearchField;
+export default Checkboxes;

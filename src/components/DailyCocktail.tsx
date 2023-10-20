@@ -15,7 +15,6 @@ const randomCocktail = async () => {
 
 const DailyCocktail = async () => {
   const cocktailOfTheDay = await randomCocktail();
-  //   console.log("@@---------ingredients", handleIngredients(cocktailOfTheDay));
   return (
     <div>
       <h1>COCKTAIL OF THE DAY</h1>
