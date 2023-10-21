@@ -1,5 +1,5 @@
 import Cocktail from "./Cocktail";
-import experimentIcon from "../data/icons";
+import CocktailDetailed from "./CocktailDetailed";
 
 const randomCocktail = async () => {
   try {
@@ -12,15 +12,12 @@ const randomCocktail = async () => {
     console.log(error);
   }
 };
-const image = experimentIcon;
 
 const DailyCocktail = async () => {
   const cocktailOfTheDay = await randomCocktail();
   return (
     <div>
-      <h1>COCKTAIL OF THE DAY</h1>
-      {/* <img src={image} alt="" width="100%" height="100%" /> */}
-      <Cocktail info={cocktailOfTheDay} searchPage="h" />
+      <CocktailDetailed info={cocktailOfTheDay} pageOrigin="h" />
     </div>
   );
 };

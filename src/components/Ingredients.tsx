@@ -4,8 +4,8 @@ type oneIngredient = {
 
 const Ingredient = ({ info }: oneIngredient) => {
   return (
-    <div>
-      <p>{info}</p>
+    <div className="w-1/3">
+      <li>{info}</li>
     </div>
   );
 };

@@ -77,6 +77,7 @@ const Cocktail = ({ info, searchPage }: CocktailProps) => {
         ingredientsList.map((item, index) => {
           return <Ingredient key={index} info={item} />;
         })}
+      <p>{info.strInstructions}</p>
     </div>
   );
 };
