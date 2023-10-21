@@ -104,10 +104,14 @@ const SearchField = ({
   };
 
   return (
-    <div className="h-80%">
+    <div className="h-80% flex gap-10">
+      <h2>Search a cocktail by {searchPage === "s" ? "name" : "ingredient"}</h2>
       <input
         type="text"
-        placeholder="start typing"
+        placeholder={`type a cocktail ${
+          searchPage === "s" ? "name" : "ingredient"
+        }`}
+        className="block rounded-md border-0 p-5 py-1.5 w-1/3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-700 sm:text-sm sm:leading-6"
         onChange={handleInput}
         value={input}
       />

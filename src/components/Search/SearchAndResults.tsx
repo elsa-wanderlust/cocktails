@@ -89,12 +89,16 @@ const SearchAndResults = ({ searchPage }: searchTypeProps) => {
         />
       )}
 
-      {!isLoading && data.length && (
+      {!isLoading && data.length !== 0 && (
         <div>
-          <p>we have found {data.length} cocktails</p>
-          {data.map((item, index) => {
-            return <Cocktail key={index} info={item} searchPage={searchPage} />;
-          })}
+          <p className="italic my-2">
+            We have found {data.length} cocktail{data.length > 1 && "s"}
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            {data.map((item, index) => {
+              return <Cocktail key={index} info={item} />;
+            })}
+          </div>
         </div>
       )}
     </>

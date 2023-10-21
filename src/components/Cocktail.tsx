@@ -1,7 +1,4 @@
-// import components
-import Ingredient from "./Ingredients";
-// import function
-import handleIngredients from "@/utils/handleIngredients";
+import Link from "next/link";
 
 type CocktailProps = {
   info: {
@@ -57,28 +54,28 @@ type CocktailProps = {
     strCreativeCommonsConfirmed?: string;
     dateModified?: string;
   };
-  searchPage: string;
 };
 
-const Cocktail = ({ info, searchPage }: CocktailProps) => {
-  const ingredientsList = handleIngredients(info);
+{
+  /* <Link href="/dashboard">Dashboard</Link> */
+}
+
+const Cocktail = ({ info }: CocktailProps) => {
   return (
-    <div>
-      <h1>{info.strDrink}</h1>
+    <Link
+      href={`/cocktail/${info.idDrink}`}
+      className="border border-green-950 w-1/6 flex flex-col items-center bg-green-50"
+    >
       {info.strDrinkThumb && (
         <img
           src={info.strDrinkThumb}
           alt={`image of a cocktail: ${info.strDrink}`}
-          height="100px"
-          width="100px"
+          height="100%"
+          width="100%"
         />
       )}
-      {searchPage === "h" &&
-        ingredientsList.map((item, index) => {
-          return <Ingredient key={index} info={item} />;
-        })}
-      <p>{info.strInstructions}</p>
-    </div>
+      <h3>{info.strDrink}</h3>
+    </Link>
   );
 };
 
