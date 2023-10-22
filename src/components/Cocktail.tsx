@@ -56,10 +56,6 @@ type CocktailProps = {
   };
 };
 
-{
-  /* <Link href="/dashboard">Dashboard</Link> */
-}
-
 const Cocktail = ({ info }: CocktailProps) => {
   return (
     <Link

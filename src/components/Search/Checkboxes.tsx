@@ -1,7 +1,7 @@
 // "use client";
 import { useState } from "react";
 // import routes
-import fetchresults from "@/app/api/route";
+import { fetchresults } from "@/app/api/route";
 
 type CocktailProps = {
   idDrink: string;

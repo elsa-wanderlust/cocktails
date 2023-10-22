@@ -57,17 +57,14 @@ type CocktailProps = {
     strCreativeCommonsConfirmed?: string;
     dateModified?: string;
   };
-  pageOrigin: string;
+  pageOrigin?: string;
 };
 
 const CocktailDetailed = ({ info, pageOrigin }: CocktailProps) => {
   const ingredientsList = handleIngredients(info);
   return (
     <div className="flex flex-col">
-      <h1 className="justify-center">
-        {pageOrigin === "h" && "Cocktail of the day: "}
-        {info.strDrink}
-      </h1>
+      <h1 className="justify-center">{info.strDrink}</h1>
       <div className="flex gap-8">
         <div className="w-1/3">
           {info.strDrinkThumb && (
