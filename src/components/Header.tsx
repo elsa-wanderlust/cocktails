@@ -10,8 +10,8 @@ export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 opacity-95">
-      <div className="absolute inset-0 overflow-y-hidden">
+    <header className="sticky top-0">
+      <div className="absolute inset-0 overflow-y-hidden opacity-95">
         <Image src={backgroundImage} alt="backgroundImage" />
       </div>
       <nav
@@ -60,7 +60,7 @@ export default function Example() {
                           {item.elements.map((subItem) => (
                             <div
                               key={subItem.subSection}
-                              className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-green-50"
+                              className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-200"
                             >
                               <div className="flex-auto">
                                 <a
@@ -85,7 +85,7 @@ export default function Example() {
               <a
                 key={index}
                 href={item.url}
-                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-green-50"
+                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
               >
                 {item.section}
               </a>

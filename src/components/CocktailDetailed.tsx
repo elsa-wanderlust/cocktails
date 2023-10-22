@@ -1,5 +1,5 @@
 // import components
-import Ingredient from "./Ingredients";
+import FavortiesIcons from "./FavoritesIcons";
 // import function
 import handleIngredients from "@/utils/handleIngredients";
 
@@ -60,11 +60,14 @@ type CocktailProps = {
   pageOrigin?: string;
 };
 
-const CocktailDetailed = ({ info, pageOrigin }: CocktailProps) => {
+const CocktailDetailed = ({ info }: CocktailProps) => {
   const ingredientsList = handleIngredients(info);
   return (
     <div className="flex flex-col">
-      <h1 className="justify-center">{info.strDrink}</h1>
+      <div className="flex justify-between">
+        <h1 className="justify-center">{info.strDrink}</h1>
+        <FavortiesIcons />
+      </div>
       <div className="flex gap-8">
         <div className="w-1/3">
           {info.strDrinkThumb && (
@@ -80,8 +83,6 @@ const CocktailDetailed = ({ info, pageOrigin }: CocktailProps) => {
           )}
         </div>
         <div className="w-2/3">
-          <h4>Category</h4>
-          {info.strCategory}
           <h4>Ingredients</h4>
           <div className="list-disc list-inside	flex flex-wrap gap-3">
             {ingredientsList.map((item, index) => {
@@ -102,6 +103,10 @@ const CocktailDetailed = ({ info, pageOrigin }: CocktailProps) => {
             <div>
               <h4>Alcohol content</h4>
               {info.strAlcoholic}
+            </div>
+            <div>
+              <h4>Category</h4>
+              {info.strCategory}
             </div>
           </div>
         </div>

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Modal from "./Modal";
+import { useState } from "react";
 
 type CocktailProps = {
   info: {
@@ -57,21 +59,34 @@ type CocktailProps = {
 };
 
 const Cocktail = ({ info }: CocktailProps) => {
+  const [isOpen, setisOpen] = useState(false);
   return (
-    <Link
-      href={`/cocktail/${info.idDrink}`}
+    <div
+      // href={`/cocktail/${info.idDrink}`}
       className="border border-green-950 w-1/6 flex flex-col items-center bg-green-50"
+      onClick={() => {
+        setisOpen(true);
+      }}
     >
-      {info.strDrinkThumb && (
-        <img
-          src={info.strDrinkThumb}
-          alt={`image of a cocktail: ${info.strDrink}`}
-          height="100%"
-          width="100%"
-        />
-      )}
-      <h3>{info.strDrink}</h3>
-    </Link>
+      <div>
+        {info.strDrinkThumb && (
+          <img
+            src={info.strDrinkThumb}
+            alt={`image of a cocktail: ${info.strDrink}`}
+            height="100%"
+            width="100%"
+          />
+        )}
+        <h3>{info.strDrink}</h3>
+      </div>
+      <Modal
+        isOpen={isOpen}
+        closeModal={() => {
+          setisOpen(false);
+        }}
+        id={info.idDrink}
+      />
+    </div>
   );
 };
 
