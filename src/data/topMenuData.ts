@@ -2,6 +2,7 @@ const TopMenuData = [
   {
     section: "Cocktail of the day",
     url: "/",
+    modal: false,
   },
   {
     section: "Find a cocktail",
@@ -30,7 +31,7 @@ const TopMenuData = [
   },
   {
     section: "Login / Sign up",
-    url: "/login",
+    url: "modal",
   },
 ];
 

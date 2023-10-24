@@ -1,13 +1,17 @@
 "use client";
+
 import { Fragment, useState } from "react";
-import Image from "next/image";
 import { Popover, Transition } from "@headlessui/react";
+
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import Image from "next/image";
+import ModalFrame from "./Modal/ModalFrame";
 import TopMenuData from "@/data/topMenuData";
 import backgroundImage from "../images/header_bg.jpg";
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [modalOpen, setmodalOpen] = useState(false);
 
   return (
     <header className="sticky top-0">
@@ -80,10 +84,23 @@ export default function Example() {
                 </Popover.Group>
               </>
             );
+          } else if (item.url === "modal") {
+            return (
+              <p
+                key={item.section}
+                // href={item.url}
+                onClick={() => {
+                  setmodalOpen(true);
+                }}
+                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
+              >
+                {item.section}
+              </p>
+            );
           } else {
             return (
               <a
-                key={index}
+                key={item.section}
                 href={item.url}
                 className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
               >
@@ -93,6 +110,12 @@ export default function Example() {
           }
         })}
       </nav>
+      <ModalFrame
+        modalOpen={modalOpen}
+        closeModal={() => {
+          setmodalOpen(false);
+        }}
+      />
     </header>
   );
 }

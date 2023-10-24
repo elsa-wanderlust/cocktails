@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Modal from "./Modal";
-import { useState } from "react";
+// import { useState } from "react";
+// import ModalFrame from "./Modal/ModalFrame";
 
 type CocktailProps = {
   info: {
@@ -59,14 +59,14 @@ type CocktailProps = {
 };
 
 const Cocktail = ({ info }: CocktailProps) => {
-  const [isOpen, setisOpen] = useState(false);
+  // const [modalOpen, setmodalOpen] = useState(false);
   return (
-    <div
-      // href={`/cocktail/${info.idDrink}`}
+    <Link
+      href={`/cocktail/${info.idDrink}`}
       className="border border-green-950 w-1/6 flex flex-col items-center bg-green-50"
-      onClick={() => {
-        setisOpen(true);
-      }}
+      // onClick={() => {
+      //   setmodalOpen(true);
+      // }}
     >
       <div>
         {info.strDrinkThumb && (
@@ -79,14 +79,13 @@ const Cocktail = ({ info }: CocktailProps) => {
         )}
         <h3>{info.strDrink}</h3>
       </div>
-      <Modal
-        isOpen={isOpen}
+      {/* <ModalFrame
+        modalOpen={modalOpen}
         closeModal={() => {
-          setisOpen(false);
+          setmodalOpen(false);
         }}
-        id={info.idDrink}
-      />
-    </div>
+      /> */}
+    </Link>
   );
 };
 

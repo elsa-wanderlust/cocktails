@@ -64,7 +64,7 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
   const ingredientsList = handleIngredients(info);
   return (
     <div className="flex flex-col">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <h1 className="justify-center">{info.strDrink}</h1>
         <FavortiesIcons />
       </div>
