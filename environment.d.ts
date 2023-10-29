@@ -1,8 +1,8 @@
 namespace NodeJS {
   interface ProcessEnv {
+    DB_PORT: number;
+    DB_USER: string;
+    ENV: "test" | "dev" | "prod";
     MONGODB_URI: string;
   }
 }
-
-MONGODB_URI = "mongodb://localhost:27017/Cocktails";
-// # MONGODB_URI=mongodb+srv://elsa:X3afazZCSgnq4bRq@cluster0.qrwxxqn.mongodb.net/Cocktails

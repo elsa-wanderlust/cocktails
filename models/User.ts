@@ -1,22 +1,55 @@
 import { Schema, model, models } from "mongoose";
 
-const user = new Schema({
+const userSchema = new Schema({
   account: {
-    email: String,
-    firstName: String,
-    lastName: String,
-    DOB: Date,
+    email: {
+      type: String,
+      required: true,
+      // unique: true,
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    DOB: {
+      type: Date,
+      // required: true,
+    },
   },
   password: {
-    token: String,
-    hash: String,
-    salt: String,
+    token: {
+      type: String,
+      // required: true,
+    },
+    hash: {
+      type: String,
+      // required: true,
+    },
+    salt: {
+      type: String,
+      // required: true,
+    },
   },
   savedCocktails: [
     {
-      idDrink: String,
-      status: String,
-      note: String,
+      idDrink: {
+        type: String,
+        required: true,
+      },
+      status: {
+        type: String,
+        required: true,
+      },
+      note: {
+        type: String,
+      },
     },
   ],
 });
+
+export default model("User", userSchema);
+// export default models.User || model("User", userSchema);

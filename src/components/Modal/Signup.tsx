@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import Image from "next/image";
 import closeIcon from "../../images/icons/close.svg";
-// import { useState } from "react";
+import { signupFormSchema } from "@/app/lib/validations/signupForm";
 
 type Signup = {
   closeModal: () => void;
@@ -9,18 +9,25 @@ type Signup = {
 };
 
 export const Signup = ({ closeModal, setModalSelect }: Signup) => {
+  // declare form submit function
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const response = await fetch("/api/user", {
-      method: "POST",
-      body: formData,
-    });
-    // console.log("@@response", response.statusText);
-    // // Handle response if necessary
-    const data = await response.json();
-    // // ...
-    console.log("@@responsedata", data);
+    try {
+      console.log("@@event.currentTarget", event.currentTarget);
+      const formData = new FormData(event.currentTarget);
+      console.log("@@formData", formData);
+      const validatedData = signupFormSchema.parse(formData);
+
+      // console.log("@@validateData", validatedData);
+      const response = await fetch("/api/user", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      console.log("@@responsedata", data);
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   return (
