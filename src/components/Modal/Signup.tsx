@@ -1,32 +1,50 @@
-import { FormEvent } from "react";
+import type { FieldValues } from "react-hook-form";
 import Image from "next/image";
+import React from "react";
 import closeIcon from "../../images/icons/close.svg";
-import { signupFormSchema } from "@/app/lib/validations/signupForm";
+import closedEye from "../../images/icons/closedEye.svg";
+import eye from "../../images/icons/eye.svg";
+import { signupFormSchema } from "@/app/lib/validations/signupFormSchema";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type Signup = {
+type SignupProps = {
   closeModal: () => void;
   setModalSelect: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const Signup = ({ closeModal, setModalSelect }: Signup) => {
-  // declare form submit function
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      console.log("@@event.currentTarget", event.currentTarget);
-      const formData = new FormData(event.currentTarget);
-      console.log("@@formData", formData);
-      const validatedData = signupFormSchema.parse(formData);
+type TSignupFormSchema = z.infer<typeof signupFormSchema>;
 
-      // console.log("@@validateData", validatedData);
-      const response = await fetch("/api/user", {
-        method: "POST",
-        body: formData,
+export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confPasswordVisible, setConfPasswordVisible] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    setError,
+  } = useForm<TSignupFormSchema>({
+    resolver: zodResolver(signupFormSchema),
+  });
+
+  const onSubmit = async (data: FieldValues) => {
+    const response = await fetch("/api/user", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json();
+    if (response.status > 201) {
+      setError("root.serverError", {
+        type: "server",
+        message: responseData.message,
       });
-      const data = await response.json();
-      console.log("@@responsedata", data);
-    } catch (error: any) {
-      console.log(error.message);
+    } else {
+      closeModal();
+      alert("your account has been created");
     }
   };
 
@@ -45,29 +63,125 @@ export const Signup = ({ closeModal, setModalSelect }: Signup) => {
           className="object-contain"
         />
       </button>
-      <div className="flex flex-col justify-center gap-4 py-8 px-4 items-center">
-        <h3>SIGN UP</h3>
-        <form className="flex flex-col gap-4" onSubmit={onSubmit}>
-          <label>
-            First name: <input name="firstName" defaultValue="John" />
-          </label>
-          <label>
-            Last name: <input name="lastName" defaultValue="Doe" />
-          </label>
-          <label>
-            Email: <input name="email" defaultValue="example@email.com" />
-          </label>
-          <label>
-            Password: <input name="password" defaultValue="*********" />
-          </label>
-          <label>
-            Confirmed Password:
-            <input name="password" defaultValue="*********" />
-          </label>
-          <button type="submit">Submit</button>
+      <div className="flex flex-col justify-center gap-4 p-2">
+        <h3 className="text-center">SIGN UP</h3>
+        <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <p>First name </p>
+            <input
+              {...register("firstName")}
+              type="text"
+              placeholder="John"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+            />
+            {errors.firstName && (
+              <p className="text-red-500 text-sm italic">{`${errors.firstName.message}`}</p>
+            )}
+          </div>
+          <div>
+            <p>Last name </p>
+            <input
+              {...register("lastName")}
+              type="text"
+              placeholder="Doe"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+            />
+            {errors.lastName && (
+              <p className="text-red-500 text-sm italic">{`${errors.lastName.message}`}</p>
+            )}
+          </div>
+          <div>
+            <p>Email </p>
+            <input
+              {...register("email")}
+              type="email"
+              placeholder="myemail@gmail.com"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm italic">{`${errors.email.message}`}</p>
+            )}
+          </div>
+          <div>
+            <p>Age</p>
+            <input
+              {...register("age")}
+              type="number"
+              min="0"
+              placeholder="25"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+            />
+            {errors.age && (
+              <p className="text-red-500 text-sm italic">{`${errors.age.message}`}</p>
+            )}
+          </div>
+          <div className="relative">
+            <p>Password</p>
+            <input
+              {...register("password")}
+              type={passwordVisible ? "text" : "password"}
+              placeholder="*********"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6 "
+            />
+            <Image
+              src={passwordVisible ? closedEye : eye}
+              alt="eye"
+              width={20}
+              height={20}
+              className="object-contain absolute top-8 right-2"
+              onClick={() => {
+                setPasswordVisible(!passwordVisible);
+              }}
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm italic">{`${errors.password.message}`}</p>
+            )}
+          </div>
+          <div className="relative">
+            <p>Confirm password</p>
+            <input
+              {...register("confPassword")}
+              type={confPasswordVisible ? "text" : "password"}
+              placeholder="*********"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+            />
+            <Image
+              src={confPasswordVisible ? closedEye : eye}
+              alt="eye"
+              width={20}
+              height={20}
+              className="object-contain absolute top-8 right-2"
+              onClick={() => {
+                setConfPasswordVisible(!confPasswordVisible);
+              }}
+            />
+            {errors.confPassword && (
+              <p className="text-red-500 text-sm italic">{`${errors.confPassword.message}`}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="flex w-full justify-center rounded-md bg-emerald-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:bg-slate-300"
+          >
+            Submit
+          </button>
         </form>
-        <p onClick={() => setModalSelect("login")}>
-          If you already have an account - click here to login
+        {errors.root?.serverError.type && (
+          <p className="text-red-500 text-sm italic">
+            {errors.root.serverError.message}
+          </p>
+        )}
+        <p className="text-sm italic text-center">
+          If you already have an account - click{" "}
+          <span
+            className="underline cursor-pointer"
+            onClick={() => setModalSelect("login")}
+          >
+            here
+          </span>{" "}
+          to login
         </p>
       </div>
     </div>

@@ -3,17 +3,25 @@ import { NextRequest, NextResponse } from "next/server";
 
 import User from "../../../../models/User";
 import connectToDb from "@/middlewares/connectToDb";
+import { signupFormSchema } from "@/app/lib/validations/signupFormSchema";
 
 export const POST = connectToDb(async (req: NextRequest) => {
-  const formaData = await req.formData();
-  const firstName = formaData.get("firstName");
-  const lastName = formaData.get("lastName");
-  const email = formaData.get("email");
+  const body = await req.json();
+  // check on the server side that the received data is valid
+  const dataValidated = signupFormSchema.safeParse(body);
+  let zodError = {};
+  if (!dataValidated.success) {
+    dataValidated.error.issues.forEach((issue) => {
+      zodError = { ...zodError, [issue.path[0]]: issue.message };
+    });
+    return NextResponse.json({ errors: zodError });
+  }
+  const { firstName, lastName, email, password, age } = body;
   try {
     const userAlreadyExisted = await User.findOne({ "account.email": email });
     if (userAlreadyExisted !== null) {
       return NextResponse.json(
-        { message: "email already used" },
+        { message: "There is already an account associated with that email" },
         { status: 409 }
       );
     }
@@ -23,8 +31,6 @@ export const POST = connectToDb(async (req: NextRequest) => {
     await newUser.save();
     return NextResponse.json({ message: "created" }, { status: 201 });
   } catch (error) {
-    // return NextResponse.json({ error: message }, { status: 201 });
     return NextResponse.json({ message: error }, { status: 400 });
-    // res.status(500).json({ error: error.message });
   }
 });

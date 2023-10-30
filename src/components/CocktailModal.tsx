@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 import closeIcon from "../images/icons/close.svg";
+import { cocktailDetails } from "@/app/api/cocktailRoutes";
+import handleIngredients from "@/utils/handleIngredients";
 import hateIcon from "../images/icons/hate.svg";
 import loveIcon from "../images/icons/love.svg";
 import tryIcon from "../images/icons/try.svg";
-import { cocktailDetails } from "@/app/api/cocktailRoutes";
-import handleIngredients from "@/utils/handleIngredients";
 
 type CocktailModalProps = {
   id: string;
