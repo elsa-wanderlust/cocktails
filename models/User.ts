@@ -5,7 +5,7 @@ const userSchema = new Schema({
     email: {
       type: String,
       required: true,
-      // unique: true,
+      unique: true,
     },
     firstName: {
       type: String,
@@ -15,24 +15,24 @@ const userSchema = new Schema({
       type: String,
       required: true,
     },
-    DOB: {
-      type: Date,
-      // required: true,
+    age: {
+      type: String,
+      required: true,
     },
   },
   password: {
     token: {
       type: String,
-      // required: true,
+      required: true,
     },
     hash: {
       type: String,
-      // required: true,
+      required: true,
     },
-    salt: {
-      type: String,
-      // required: true,
-    },
+    // salt: {
+    //   type: String,
+    //   // required: true,
+    // },
   },
   savedCocktails: [
     {

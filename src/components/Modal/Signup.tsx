@@ -32,19 +32,23 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
   });
 
   const onSubmit = async (data: FieldValues) => {
-    const response = await fetch("/api/user", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    const responseData = await response.json();
-    if (response.status > 201) {
+    try {
+      const response = await fetch("/api/user", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      const responseData = await response.json();
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      } else {
+        closeModal();
+        alert("your account has been created");
+      }
+    } catch (error) {
       setError("root.serverError", {
         type: "server",
-        message: responseData.message,
+        message: error.message,
       });
-    } else {
-      closeModal();
-      alert("your account has been created");
     }
   };
 
@@ -180,7 +184,7 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
             onClick={() => setModalSelect("login")}
           >
             here
-          </span>{" "}
+          </span>
           to login
         </p>
       </div>
