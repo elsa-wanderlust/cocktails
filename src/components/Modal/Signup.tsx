@@ -44,7 +44,7 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
         closeModal();
         alert("your account has been created");
       }
-    } catch (error) {
+    } catch (error: any) {
       setError("root.serverError", {
         type: "server",
         message: error.message,
@@ -67,16 +67,16 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
           className="object-contain"
         />
       </button>
-      <div className="flex flex-col justify-center gap-4 p-2">
+      <div className="flex flex-col justify-center gap-4 px-3 py-2">
         <h3 className="text-center">SIGN UP</h3>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-          <div>
+          {/* <div>
             <p>First name </p>
             <input
               {...register("firstName")}
               type="text"
               placeholder="John"
-              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             {errors.firstName && (
               <p className="text-red-500 text-sm italic">{`${errors.firstName.message}`}</p>
@@ -88,19 +88,19 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
               {...register("lastName")}
               type="text"
               placeholder="Doe"
-              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             {errors.lastName && (
               <p className="text-red-500 text-sm italic">{`${errors.lastName.message}`}</p>
             )}
-          </div>
+          </div> */}
           <div>
             <p>Email </p>
             <input
               {...register("email")}
               type="email"
-              placeholder="myemail@gmail.com"
-              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+              // placeholder="myemail@gmail.com"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             {errors.email && (
               <p className="text-red-500 text-sm italic">{`${errors.email.message}`}</p>
@@ -112,8 +112,8 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
               {...register("age")}
               type="number"
               min="0"
-              placeholder="25"
-              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+              // placeholder="25"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             {errors.age && (
               <p className="text-red-500 text-sm italic">{`${errors.age.message}`}</p>
@@ -124,8 +124,8 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
             <input
               {...register("password")}
               type={passwordVisible ? "text" : "password"}
-              placeholder="*********"
-              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6 "
+              // placeholder="*********"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6 "
             />
             <Image
               src={passwordVisible ? closedEye : eye}
@@ -146,8 +146,8 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
             <input
               {...register("confPassword")}
               type={confPasswordVisible ? "text" : "password"}
-              placeholder="*********"
-              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black focus:border-grey-800 sm:text-sm sm:leading-6"
+              // placeholder="*********"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             <Image
               src={confPasswordVisible ? closedEye : eye}
@@ -184,7 +184,7 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
             onClick={() => setModalSelect("login")}
           >
             here
-          </span>
+          </span>{" "}
           to login
         </p>
       </div>

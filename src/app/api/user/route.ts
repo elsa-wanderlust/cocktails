@@ -18,8 +18,8 @@ export const POST = connectToDb(async (req: NextRequest) => {
       });
       return NextResponse.json({ errors: zodError });
     }
-    const { firstName, lastName, email, password, age } = body;
-    const userAlreadyExisted = await User.findOne({ "account.email": email });
+    const { email, password, age } = body;
+    const userAlreadyExisted = await User.findOne({ email: email });
     if (userAlreadyExisted !== null) {
       return NextResponse.json(
         { message: "There is already an account associated with that email" },
@@ -30,8 +30,10 @@ export const POST = connectToDb(async (req: NextRequest) => {
       const hash = await bcrypt.hash(password, 10);
       const token = "fewkjf";
       const newUser = new User({
-        account: { firstName, lastName, email, age },
-        password: { hash, token },
+        email,
+        age,
+        hash,
+        token,
       });
       await newUser.save();
       return NextResponse.json({ message: "created" }, { status: 201 });

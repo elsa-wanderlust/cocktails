@@ -1,39 +1,37 @@
 import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema({
-  account: {
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
-    age: {
-      type: String,
-      required: true,
-    },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  password: {
-    token: {
-      type: String,
-      required: true,
-    },
-    hash: {
-      type: String,
-      required: true,
-    },
-    // salt: {
-    //   type: String,
-    //   // required: true,
-    // },
+  // firstName: {
+  //   type: String,
+  //   required: true,
+  // },
+  // lastName: {
+  //   type: String,
+  //   required: true,
+  // },
+  age: {
+    type: String,
+    required: true,
   },
+
+  token: {
+    type: String,
+    required: true,
+  },
+  hash: {
+    type: String,
+    required: true,
+  },
+  // salt: {
+  //   type: String,
+  //   // required: true,
+  // },
+
   savedCocktails: [
     {
       idDrink: {

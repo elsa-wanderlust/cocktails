@@ -1,12 +1,35 @@
 import Image from "next/image";
 import closeIcon from "../../images/icons/close.svg";
+import closedEye from "../../images/icons/closedEye.svg";
+import eye from "../../images/icons/eye.svg";
+import { loginFormSchema } from "@/app/lib/validations/loginFormSchema";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type LoginProps = {
   closeModal: () => void;
   setModalSelect: React.Dispatch<React.SetStateAction<string>>;
 };
+type TLoginFormSchema = z.infer<typeof loginFormSchema>;
 
 export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    setError,
+  } = useForm<TLoginFormSchema>({
+    resolver: zodResolver(loginFormSchema),
+  });
+
+  const onSubmit = () => {
+    console.log("tried to connect");
+  };
+
   return (
     <div>
       <button
@@ -22,19 +45,68 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
           className="object-contain"
         />
       </button>
-      <div className="flex flex-col justify-center gap-4 py-8 px-4 items-center">
-        <h3>LOGIN</h3>
-        <div className="flex flex-col gap-4">
-          <label>
-            Email: <input name="email" defaultValue="example@email.com" />
-          </label>
-          <label>
-            Password: <input name="password" defaultValue="*********" />
-          </label>
-          <p onClick={() => setModalSelect("signup")}>
-            If you do not have an account yet - click here to signup
+      <div className="flex flex-col justify-center gap-4 px-3 py-2">
+        <h3 className="text-center">LOGIN</h3>
+        <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <p>Email </p>
+            <input
+              {...register("email")}
+              type="email"
+              // placeholder="myemail@gmail.com"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm italic">{`${errors.email.message}`}</p>
+            )}
+          </div>
+
+          <div className="relative">
+            <p>Password</p>
+            <input
+              {...register("password")}
+              type={passwordVisible ? "text" : "password"}
+              // placeholder="*********"
+              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6 "
+            />
+            <Image
+              src={passwordVisible ? closedEye : eye}
+              alt="eye"
+              width={20}
+              height={20}
+              className="object-contain absolute top-8 right-2"
+              onClick={() => {
+                setPasswordVisible(!passwordVisible);
+              }}
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm italic">{`${errors.password.message}`}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="flex w-full justify-center rounded-md bg-emerald-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:bg-slate-300"
+          >
+            Submit
+          </button>
+        </form>
+        {errors.root?.serverError.type && (
+          <p className="text-red-500 text-sm italic">
+            {errors.root.serverError.message}
           </p>
-        </div>
+        )}
+        <p className="text-sm italic text-center">
+          If you do not have an account yet - click{" "}
+          <span
+            className="underline cursor-pointer"
+            onClick={() => setModalSelect("signup")}
+          >
+            here
+          </span>{" "}
+          to signup
+        </p>
       </div>
     </div>
   );
