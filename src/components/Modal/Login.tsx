@@ -1,3 +1,4 @@
+import type { FieldValues } from "react-hook-form";
 import Image from "next/image";
 import closeIcon from "../../images/icons/close.svg";
 import closedEye from "../../images/icons/closedEye.svg";
@@ -26,8 +27,27 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
     resolver: zodResolver(loginFormSchema),
   });
 
-  const onSubmit = () => {
-    console.log("tried to connect");
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      console.log("@@response", response);
+      const responseData = await response.json();
+      console.log("@@responseData", responseData);
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      } else {
+        closeModal();
+        alert("you are logged in");
+      }
+    } catch (error: any) {
+      setError("root.serverError", {
+        type: "server",
+        message: error.message,
+      });
+    }
   };
 
   return (

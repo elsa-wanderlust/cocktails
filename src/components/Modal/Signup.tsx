@@ -33,7 +33,7 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      const response = await fetch("/api/user", {
+      const response = await fetch("/api/signup", {
         method: "POST",
         body: JSON.stringify(data),
       });
