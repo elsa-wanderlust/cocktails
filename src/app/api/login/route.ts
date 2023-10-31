@@ -23,7 +23,7 @@ export const POST = connectToDb(async (req: NextRequest) => {
     // if zod validated
     const { email, password } = body;
     // check if user exists with that email
-    const userExists = await User.findOne({ email: "kjashf" });
+    const userExists = await User.findOne({ email: email });
     if (!userExists) {
       return NextResponse.json(
         {
