@@ -1,24 +1,24 @@
 "use client";
+
 import Image from "next/image";
-import { useState } from "react";
+// import components
+import ModalFrame from "./Modal/ModalFrame";
+import { hasCookie } from "cookies-next";
 // import Icons
 // import hateIcon from "../images/icons/hate.svg";
 import loveIcon from "../images/icons/love.svg";
 import tryIcon from "../images/icons/try.svg";
-// import components
-import ModalFrame from "./Modal/ModalFrame";
+import { useState } from "react";
 
 const FavortiesIcons = () => {
   const [modalOpen, setmodalOpen] = useState(false);
-  const [loveText, setLoveText] = useState(false);
-  const [tryText, setTryText] = useState(false);
-
-  // TO DO - isloggedIn function
-  const isLoggedIn = false;
 
   const handleSelectFavorite = () => {
-    if (!isLoggedIn) {
+    const savedCookie = hasCookie("cocktails");
+    if (!savedCookie) {
       setmodalOpen(true);
+    } else {
+      console.log("saved as a fav");
     }
   };
 

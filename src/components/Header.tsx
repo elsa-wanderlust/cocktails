@@ -11,12 +11,14 @@ import ModalFrame from "./Modal/ModalFrame";
 import TopMenuData from "@/data/topMenuData";
 import backgroundImage from "../images/header_bg.jpg";
 import { hasCookie } from "cookies-next";
+import { useModalSelectState } from "@/state/modalSelectState";
 
 export default function Example() {
   // const cookies = useCookies();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modalOpen, setmodalOpen] = useState(false);
-  const [modalSelect, setModalSelect] = useState(""); // values: login - signup - logout
+  // const [modalSelect, setModalSelect] = useState(""); // values: login - signup - logout
+  const { modalSelect, setModalSelect } = useModalSelectState();
 
   useEffect(() => {
     console.log("@@ use effect called");
@@ -140,8 +142,8 @@ export default function Example() {
         closeModal={() => {
           setmodalOpen(false);
         }}
-        modalSelect={modalSelect}
-        setModalSelect={setModalSelect}
+        // modalSelect={modalSelect}
+        // setModalSelect={setModalSelect}
       />
     </header>
   );
