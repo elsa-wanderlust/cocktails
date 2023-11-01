@@ -1,5 +1,6 @@
 // import components
 import FavortiesIcons from "./FavoritesIcons";
+import Image from "next/image";
 // import function
 import handleIngredients from "@/utils/handleIngredients";
 
@@ -66,17 +67,21 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
     <div className="flex flex-col">
       <div className="flex justify-between items-center">
         <h1 className="justify-center">{info.strDrink}</h1>
-        <FavortiesIcons />
+        <FavortiesIcons idDrink={info.idDrink} />
       </div>
       <div className="flex gap-8">
         <div className="w-1/3">
           {info.strDrinkThumb && (
             <div className="border-black border bg-black p-1">
-              <img
+              <Image
                 src={info.strDrinkThumb}
                 alt={`image of a cocktail: ${info.strDrink}`}
-                height="100%"
-                width="100%"
+                // height="100%"
+                // width="100%"
+                // layout="fill"
+                objectFit="contain"
+                height="400"
+                width="400"
                 style={{ borderRadius: "10%" }}
               />
             </div>

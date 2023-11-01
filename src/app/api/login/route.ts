@@ -15,7 +15,7 @@ export const POST = connectToDb(async (req: NextRequest) => {
       dataValidated.error.issues.forEach((issue) => {
         zodError = { ...zodError, [issue.path[0]]: issue.message };
       });
-      return NextResponse.json({ errors: zodError });
+      return NextResponse.json({ errors: zodError }, { status: 400 });
     }
     const { email, password } = body;
     const userExists = await User.findOne({ email: email });
