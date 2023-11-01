@@ -4,6 +4,7 @@ import React from "react";
 import closeIcon from "../../images/icons/close.svg";
 import closedEye from "../../images/icons/closedEye.svg";
 import eye from "../../images/icons/eye.svg";
+import { setCookie } from "cookies-next";
 import { signupFormSchema } from "@/app/lib/validations/signupFormSchema";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -20,6 +21,7 @@ type TSignupFormSchema = z.infer<typeof signupFormSchema>;
 export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confPasswordVisible, setConfPasswordVisible] = useState(false);
+  // const cookies = useCookies();
 
   const {
     register,
@@ -41,6 +43,8 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
       if (!response.ok) {
         throw new Error(responseData.message);
       } else {
+        setCookie("cocktails", responseData.token);
+        setModalSelect("logout");
         closeModal();
         alert("your account has been created");
       }
@@ -70,36 +74,11 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
       <div className="flex flex-col justify-center gap-4 px-3 py-2">
         <h3 className="text-center">SIGN UP</h3>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-          {/* <div>
-            <p>First name </p>
-            <input
-              {...register("firstName")}
-              type="text"
-              placeholder="John"
-              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
-            />
-            {errors.firstName && (
-              <p className="text-red-500 text-sm italic">{`${errors.firstName.message}`}</p>
-            )}
-          </div>
-          <div>
-            <p>Last name </p>
-            <input
-              {...register("lastName")}
-              type="text"
-              placeholder="Doe"
-              className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
-            />
-            {errors.lastName && (
-              <p className="text-red-500 text-sm italic">{`${errors.lastName.message}`}</p>
-            )}
-          </div> */}
           <div>
             <p>Email </p>
             <input
               {...register("email")}
               type="email"
-              // placeholder="myemail@gmail.com"
               className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             {errors.email && (
@@ -112,7 +91,6 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
               {...register("age")}
               type="number"
               min="0"
-              // placeholder="25"
               className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             {errors.age && (
@@ -124,7 +102,6 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
             <input
               {...register("password")}
               type={passwordVisible ? "text" : "password"}
-              // placeholder="*********"
               className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6 "
             />
             <Image
@@ -146,7 +123,6 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
             <input
               {...register("confPassword")}
               type={confPasswordVisible ? "text" : "password"}
-              // placeholder="*********"
               className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             <Image

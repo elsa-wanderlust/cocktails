@@ -1,7 +1,5 @@
 // import components
 import CocktailDetailed from "./CocktailDetailed";
-// ELSA ESSAI
-import { isConnected } from "@/utils/isConnected";
 
 const randomCocktail = async () => {
   try {
@@ -14,8 +12,6 @@ const randomCocktail = async () => {
     console.log(error);
   }
 };
-const isConnectedTrue = isConnected();
-console.log("-----isConnected", isConnectedTrue);
 
 const DailyCocktail = async () => {
   const cocktailOfTheDay = await randomCocktail();

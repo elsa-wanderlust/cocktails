@@ -4,6 +4,7 @@ import closeIcon from "../../images/icons/close.svg";
 import closedEye from "../../images/icons/closedEye.svg";
 import eye from "../../images/icons/eye.svg";
 import { loginFormSchema } from "@/app/lib/validations/loginFormSchema";
+import { setCookie } from "cookies-next";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { z } from "zod";
@@ -17,6 +18,7 @@ type TLoginFormSchema = z.infer<typeof loginFormSchema>;
 
 export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -33,12 +35,12 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
         method: "POST",
         body: JSON.stringify(data),
       });
-      console.log("@@response", response);
       const responseData = await response.json();
-      console.log("@@responseData", responseData);
       if (!response.ok) {
         throw new Error(responseData.message);
       } else {
+        setCookie("cocktails", responseData.token);
+        setModalSelect("logout");
         closeModal();
         alert("you are logged in");
       }
@@ -73,7 +75,6 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
             <input
               {...register("email")}
               type="email"
-              // placeholder="myemail@gmail.com"
               className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6"
             />
             {errors.email && (
@@ -86,7 +87,6 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
             <input
               {...register("password")}
               type={passwordVisible ? "text" : "password"}
-              // placeholder="*********"
               className="block w-full rounded-md border-0 p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-teal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-950 focus:border-grey-800 sm:text-sm sm:leading-6 "
             />
             <Image

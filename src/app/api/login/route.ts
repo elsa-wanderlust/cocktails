@@ -1,16 +1,13 @@
-// import type { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 
 import User from "../../../../models/User";
 import bcrypt from "bcrypt";
 import connectToDb from "@/middlewares/connectToDb";
-import { cookies } from "next/headers";
 import { loginFormSchema } from "@/app/lib/validations/loginFormSchema";
 
 export const POST = connectToDb(async (req: NextRequest) => {
   const body = await req.json();
   try {
-    // check on the server side that the received data is valid
     const dataValidated = loginFormSchema.safeParse(body);
     let zodError = {};
     if (!dataValidated.success) {
@@ -20,9 +17,7 @@ export const POST = connectToDb(async (req: NextRequest) => {
       });
       return NextResponse.json({ errors: zodError });
     }
-    // if zod validated
     const { email, password } = body;
-    // check if user exists with that email
     const userExists = await User.findOne({ email: email });
     if (!userExists) {
       return NextResponse.json(
@@ -33,7 +28,6 @@ export const POST = connectToDb(async (req: NextRequest) => {
         { status: 401 }
       );
     }
-    // check if pw is correct
     const pwValid = await bcrypt.compare(password, userExists.hash);
     if (!pwValid) {
       return NextResponse.json(
@@ -44,12 +38,10 @@ export const POST = connectToDb(async (req: NextRequest) => {
         { status: 401 }
       );
     }
-    // if both user and pw are OK - save token in cookie
-    cookies().set({
-      name: "cocktails",
-      value: userExists.token,
-    });
-    return NextResponse.json({ message: "logged in" }, { status: 201 });
+    return NextResponse.json(
+      { message: "logged in", token: userExists.token },
+      { status: 201 }
+    );
   } catch (error: unknown) {
     if (typeof error === "string") {
       return NextResponse.json({ message: error }, { status: 500 });

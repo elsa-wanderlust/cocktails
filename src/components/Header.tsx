@@ -1,6 +1,8 @@
 "use client";
 
-import { Fragment, useState } from "react";
+// import { isConnected } from "@/utils/isConnected";
+// import { Cookies, useCookies } from "next-client-cookies";
+import { Fragment, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -8,10 +10,29 @@ import Image from "next/image";
 import ModalFrame from "./Modal/ModalFrame";
 import TopMenuData from "@/data/topMenuData";
 import backgroundImage from "../images/header_bg.jpg";
+import { hasCookie } from "cookies-next";
 
 export default function Example() {
+  // const cookies = useCookies();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modalOpen, setmodalOpen] = useState(false);
+  const [modalSelect, setModalSelect] = useState(""); // values: login - signup - logout
+
+  useEffect(() => {
+    console.log("@@ use effect called");
+    // const cookies = useCookies();
+    const checkConnection = () => {
+      // const savedCookie = cookies.get("cocktails");
+      const savedCookie = hasCookie("cocktails");
+
+      if (savedCookie) {
+        setModalSelect("logout");
+      } else {
+        setModalSelect("signup");
+      }
+    };
+    checkConnection();
+  }, []);
 
   return (
     <header className="sticky top-0">
@@ -87,20 +108,24 @@ export default function Example() {
           } else if (item.url === "modal") {
             return (
               <p
-                key={item.section}
+                key={index}
                 // href={item.url}
                 onClick={() => {
                   setmodalOpen(true);
                 }}
                 className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
               >
-                {item.section}
+                {/* {modalTitle ? item.section[1] : item.section[0]} */}
+                {/* {modalTitle} */}
+                {modalSelect === "login" || modalSelect === "signup"
+                  ? "Login / Sign up"
+                  : "Logout"}
               </p>
             );
           } else {
             return (
               <a
-                key={item.section}
+                key={index}
                 href={item.url}
                 className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
               >
@@ -115,6 +140,8 @@ export default function Example() {
         closeModal={() => {
           setmodalOpen(false);
         }}
+        modalSelect={modalSelect}
+        setModalSelect={setModalSelect}
       />
     </header>
   );

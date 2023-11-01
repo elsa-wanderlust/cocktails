@@ -6,19 +6,10 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
-  // firstName: {
-  //   type: String,
-  //   required: true,
-  // },
-  // lastName: {
-  //   type: String,
-  //   required: true,
-  // },
   age: {
     type: String,
     required: true,
   },
-
   token: {
     type: String,
     required: true,
@@ -27,11 +18,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  // salt: {
-  //   type: String,
-  //   // required: true,
-  // },
-
   savedCocktails: [
     {
       idDrink: {
@@ -49,5 +35,4 @@ const userSchema = new Schema({
   ],
 });
 
-export default model("User", userSchema);
-// export default models.User || model("User", userSchema);
+export default models.User || model("User", userSchema);

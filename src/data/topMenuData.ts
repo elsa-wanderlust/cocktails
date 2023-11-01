@@ -30,7 +30,7 @@ const TopMenuData = [
     url: "/favorites",
   },
   {
-    section: "Login / Sign up",
+    section: ["Login / Sign up", "Log out"],
     url: "modal",
   },
 ];
