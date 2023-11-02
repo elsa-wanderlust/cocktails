@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 // import components
 import ModalFrame from "./Modal/ModalFrame";
@@ -9,13 +11,13 @@ import { hasCookie } from "cookies-next";
 // import hateIcon from "../images/icons/hate.svg";
 import loveIcon from "../images/icons/love.svg";
 import tryIcon from "../images/icons/try.svg";
-import { useState } from "react";
 
 type CocktailProps = {
   idDrink: string;
 };
 
 const FavortiesIcons = ({ idDrink }: CocktailProps) => {
+  const [isDrinkFav, setIsDrinkFav] = useState(false);
   const [modalOpen, setmodalOpen] = useState(false);
 
   const handleSelectFavorite = async () => {
@@ -41,6 +43,36 @@ const FavortiesIcons = ({ idDrink }: CocktailProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    console.log("----- useEffect called");
+    const token = getCookie("cocktails");
+    console.log("----- token", token);
+    const isFav = async () => {
+      console.log("----- is FAV called");
+      try {
+        const response = await fetch("/api/favorite", {
+          method: "GET",
+          headers: { authorization: `Bearer ${token}` },
+          // body: JSON.stringify({ token, idDrink }),
+        });
+        const responseData = await response.json();
+        console.log("---response", response);
+        console.log("---responseData", responseData);
+        if (!response.ok) {
+          alert("FAILURE TOTAL");
+          throw new Error(responseData.message);
+        } else {
+          alert("haha saved");
+        }
+      } catch (error: any) {
+        alert(error);
+      }
+    };
+    if (token) {
+      isFav();
+    }
+  }, [idDrink]);
 
   return (
     <div className="flex gap-10 ml-10">

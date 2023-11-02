@@ -21,7 +21,6 @@ export default function Example() {
   const { modalSelect, setModalSelect } = useModalSelectState();
 
   useEffect(() => {
-    console.log("@@ use effect called");
     // const cookies = useCookies();
     const checkConnection = () => {
       // const savedCookie = cookies.get("cocktails");

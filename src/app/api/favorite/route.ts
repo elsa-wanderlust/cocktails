@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import User from "../../../../models/User";
 import connectToDb from "@/middlewares/connectToDb";
+import { headers } from "next/headers";
 import { isAuthenticated } from "@/middlewares/isAuthenticated";
 
 export const POST = connectToDb(async (req: NextRequest) => {
@@ -66,24 +67,31 @@ export const DELETE = connectToDb(async (req: NextRequest) => {
   }
 });
 
+// USE SWR
 // TypeError: Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body.
 export const GET = connectToDb(async (req: NextRequest) => {
-  const body = await req.json();
+  const headersList = headers();
+  const authorization = headersList.get("authorization");
+  console.log("-----authorization", authorization);
   try {
-    const responseAuth = await isAuthenticated(body.token);
-    const responseAuthData = await responseAuth.json();
-    if (responseAuthData.message !== "authorized") {
-      throw new Error(responseAuthData.message);
-    } else {
-      const { token } = body;
-      const { _id, savedCocktails } = await User.findOne({
-        token: token,
-      }).select("savedCocktails");
-      return NextResponse.json(
-        { message: "got list", favCocktails: savedCocktails },
-        { status: 200 }
-      );
-    }
+    return NextResponse.json(
+      { message: "AT LEAST YOU TRIED" },
+      { status: 201 }
+    );
+    // const responseAuth = await isAuthenticated(body.token);
+    // const responseAuthData = await responseAuth.json();
+    // if (responseAuthData.message !== "authorized") {
+    //   throw new Error(responseAuthData.message);
+    // } else {
+    //   const { token } = body;
+    //   const { _id, savedCocktails } = await User.findOne({
+    //     token: token,
+    //   }).select("savedCocktails");
+    //   return NextResponse.json(
+    //     { message: "got list", favCocktails: savedCocktails },
+    //     { status: 200 }
+    //   );
+    // }
   } catch (error) {
     return NextResponse.json({ message: "server error" }, { status: 500 });
   }
