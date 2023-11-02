@@ -68,7 +68,7 @@ ModalProps) => {
                   ) : (
                     <Logout
                       closeModal={closeModal}
-                      setModalSelect={setModalSelect}
+                      // setModalSelect={setModalSelect}
                     />
                   )}
                 </Dialog.Panel>

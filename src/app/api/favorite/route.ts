@@ -13,12 +13,12 @@ export const POST = connectToDb(async (req: NextRequest) => {
     if (responseAuthData.message !== "authorized") {
       throw new Error(responseAuthData.message);
     } else {
-      const { token, idDrink } = body;
+      const { token, idDrink, strDrink, strDrinkThumb } = body;
       const { _id, savedCocktails } = await User.findOne({
         token: token,
       }).select("savedCocktails");
       let newSavedCocktails = [...savedCocktails];
-      newSavedCocktails.push({ idDrink: idDrink, note: "" });
+      newSavedCocktails.push({ idDrink, note: "", strDrink, strDrinkThumb });
       let doc = await User.findByIdAndUpdate(
         { _id: _id },
         { savedCocktails: newSavedCocktails },
@@ -67,8 +67,6 @@ export const DELETE = connectToDb(async (req: NextRequest) => {
   }
 });
 
-// USE SWR
-// TypeError: Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body.
 export const GET = connectToDb(async (req: NextRequest) => {
   const headersList = headers();
   const authorization = headersList.get("authorization");

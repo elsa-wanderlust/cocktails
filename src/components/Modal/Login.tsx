@@ -6,6 +6,7 @@ import eye from "../../images/icons/eye.svg";
 import { loginFormSchema } from "@/app/lib/validations/loginFormSchema";
 import { setCookie } from "cookies-next";
 import { useForm } from "react-hook-form";
+import { useIsConnectedState } from "@/state/modalSelectState";
 // import { useModalSelectState } from "@/state/modalSelectState";
 import { useState } from "react";
 import { z } from "zod";
@@ -19,6 +20,8 @@ type TLoginFormSchema = z.infer<typeof loginFormSchema>;
 
 export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
   // const { setModalSelect } = useModalSelectState();
+  const { setIsConnected } = useIsConnectedState();
+
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const {
@@ -42,7 +45,8 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
         throw new Error(responseData.message);
       } else {
         setCookie("cocktails", responseData.token);
-        setModalSelect("logout");
+        setIsConnected(true);
+        // setModalSelect("logout");
         closeModal();
         alert("you are logged in");
       }

@@ -67,7 +67,11 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
     <div className="flex flex-col">
       <div className="flex justify-between items-center">
         <h1 className="justify-center">{info.strDrink}</h1>
-        <FavortiesIcons idDrink={info.idDrink} />
+        <FavortiesIcons
+          idDrink={info.idDrink}
+          strDrink={info.strDrink}
+          strDrinkThumb={info.strDrinkThumb}
+        />
       </div>
       <div className="flex gap-8">
         <div className="w-1/3">

@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 import mongoose from "mongoose";
 
-// to type handler, request and response
-
 const connectToDb =
   (handler: any) => async (request: NextRequest, response: NextResponse) => {
     try {

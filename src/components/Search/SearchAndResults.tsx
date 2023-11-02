@@ -1,12 +1,13 @@
 "use client";
-import { useState } from "react";
-// import components
-import Cocktail from "../Cocktail";
-import SearchField from "./SearchField";
+
 import Checkboxes from "./Checkboxes";
+// import components
+import CocktailCard from "../CocktailCard";
+import SearchField from "./SearchField";
+import { categories } from "@/data/cocktailsData";
 // import data
 import { glasses } from "@/data/cocktailsData";
-import { categories } from "@/data/cocktailsData";
+import { useState } from "react";
 
 type searchTypeProps = {
   searchPage: string;
@@ -88,7 +89,6 @@ const SearchAndResults = ({ searchPage }: searchTypeProps) => {
           setData={setData}
         />
       )}
-
       {!isLoading && data.length !== 0 && (
         <div>
           <p className="italic my-2">
@@ -96,7 +96,7 @@ const SearchAndResults = ({ searchPage }: searchTypeProps) => {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             {data.map((item, index) => {
-              return <Cocktail key={index} info={item} />;
+              return <CocktailCard key={index} info={item} />;
             })}
           </div>
         </div>

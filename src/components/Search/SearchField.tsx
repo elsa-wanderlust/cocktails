@@ -1,7 +1,7 @@
-// "use client";
-import { useState } from "react";
 // import routes
 import { fetchresults } from "@/app/api/cocktailRoutes";
+// "use client";
+import { useState } from "react";
 
 type Input = {
   target: {
@@ -87,6 +87,7 @@ const SearchField = ({
           input.target.value,
           searchPage
         );
+        console.log("----@@Cocktail Found", cocktailsFound);
         if (cocktailsFound) {
           setData(cocktailsFound);
           setIsLoading(false);

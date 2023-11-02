@@ -24,6 +24,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
       },
+      strDrink: {
+        type: String,
+        required: true,
+      },
+      strDrinkThumb: {
+        type: String,
+        required: true,
+      },
       // status: {
       //   type: String,
       //   required: true,

@@ -11,9 +11,15 @@ import loveIconRed from "../images/icons/loveRed.svg";
 
 type CocktailProps = {
   idDrink: string;
+  strDrink: string;
+  strDrinkThumb: string;
 };
 
-const FavortiesIcons = ({ idDrink }: CocktailProps) => {
+const FavortiesIcons = ({
+  idDrink,
+  strDrink,
+  strDrinkThumb,
+}: CocktailProps) => {
   const [isDrinkFav, setIsDrinkFav] = useState(false);
   const [modalOpen, setmodalOpen] = useState(false);
 
@@ -25,7 +31,7 @@ const FavortiesIcons = ({ idDrink }: CocktailProps) => {
       try {
         const response = await fetch("/api/favorite", {
           method: isDrinkFav ? "DELETE" : "POST",
-          body: JSON.stringify({ token, idDrink }),
+          body: JSON.stringify({ token, idDrink, strDrink, strDrinkThumb }),
         });
         const responseData = await response.json();
         if (!response.ok) {

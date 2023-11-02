@@ -8,6 +8,7 @@ import { setCookie } from "cookies-next";
 import { signupFormSchema } from "@/app/lib/validations/signupFormSchema";
 import { useForm } from "react-hook-form";
 // import { useModalSelectState } from "@/state/modalSelectState";
+import { useIsConnectedState } from "@/state/modalSelectState";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,6 +25,7 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confPasswordVisible, setConfPasswordVisible] = useState(false);
   // const cookies = useCookies();
+  const { setIsConnected } = useIsConnectedState();
 
   const {
     register,
@@ -46,7 +48,8 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
         throw new Error(responseData.message);
       } else {
         setCookie("cocktails", responseData.token);
-        setModalSelect("logout");
+        setIsConnected(true);
+        // setModalSelect("logout");
         closeModal();
         alert("your account has been created");
       }
