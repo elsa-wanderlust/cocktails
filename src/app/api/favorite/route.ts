@@ -72,26 +72,25 @@ export const DELETE = connectToDb(async (req: NextRequest) => {
 export const GET = connectToDb(async (req: NextRequest) => {
   const headersList = headers();
   const authorization = headersList.get("authorization");
-  console.log("-----authorization", authorization);
+  if (!authorization) {
+    return NextResponse.json({ message: "unauthorized" }, { status: 401 });
+  }
   try {
-    return NextResponse.json(
-      { message: "AT LEAST YOU TRIED" },
-      { status: 201 }
+    const responseAuth = await isAuthenticated(
+      authorization.replace("Bearer ", "")
     );
-    // const responseAuth = await isAuthenticated(body.token);
-    // const responseAuthData = await responseAuth.json();
-    // if (responseAuthData.message !== "authorized") {
-    //   throw new Error(responseAuthData.message);
-    // } else {
-    //   const { token } = body;
-    //   const { _id, savedCocktails } = await User.findOne({
-    //     token: token,
-    //   }).select("savedCocktails");
-    //   return NextResponse.json(
-    //     { message: "got list", favCocktails: savedCocktails },
-    //     { status: 200 }
-    //   );
-    // }
+    const responseAuthData = await responseAuth.json();
+    if (responseAuthData.message !== "authorized") {
+      throw new Error(responseAuthData.message);
+    } else {
+      const { savedCocktails } = await User.findOne({
+        token: authorization.replace("Bearer ", ""),
+      }).select("savedCocktails");
+      return NextResponse.json(
+        { message: "got list", favCocktails: savedCocktails },
+        { status: 200 }
+      );
+    }
   } catch (error) {
     return NextResponse.json({ message: "server error" }, { status: 500 });
   }
