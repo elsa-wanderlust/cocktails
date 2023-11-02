@@ -6,7 +6,8 @@ import { Fragment } from "react";
 import { Login } from "./Login";
 import { Logout } from "./Logout";
 import { Signup } from "./Signup";
-import { useModalSelectState } from "@/state/modalSelectState";
+import { useIsConnectedState } from "@/state/modalSelectState";
+// import { useModalSelectState } from "@/state/modalSelectState";
 import { useState } from "react";
 
 type ModalProps = {
@@ -22,7 +23,11 @@ const ModalFrame = ({
 }: // modalSelect,
 // setModalSelect,
 ModalProps) => {
-  const { modalSelect } = useModalSelectState();
+  // const { modalSelect } = useModalSelectState();
+  const { isConnected } = useIsConnectedState();
+  const [modalSelect, setModalSelect] = useState(
+    isConnected ? "logout" : "signup"
+  );
   return (
     <>
       <Transition appear show={modalOpen} as={Fragment}>
@@ -53,17 +58,17 @@ ModalProps) => {
                   {modalSelect === "signup" ? (
                     <Signup
                       closeModal={closeModal}
-                      // setModalSelect={setModalSelect}
+                      setModalSelect={setModalSelect}
                     />
                   ) : modalSelect === "login" ? (
                     <Login
                       closeModal={closeModal}
-                      // setModalSelect={setModalSelect}
+                      setModalSelect={setModalSelect}
                     />
                   ) : (
                     <Logout
                       closeModal={closeModal}
-                      // setModalSelect={setModalSelect}
+                      setModalSelect={setModalSelect}
                     />
                   )}
                 </Dialog.Panel>

@@ -6,19 +6,19 @@ import eye from "../../images/icons/eye.svg";
 import { loginFormSchema } from "@/app/lib/validations/loginFormSchema";
 import { setCookie } from "cookies-next";
 import { useForm } from "react-hook-form";
-import { useModalSelectState } from "@/state/modalSelectState";
+// import { useModalSelectState } from "@/state/modalSelectState";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type LoginProps = {
   closeModal: () => void;
-  // setModalSelect: React.Dispatch<React.SetStateAction<string>>;
+  setModalSelect: React.Dispatch<React.SetStateAction<string>>;
 };
 type TLoginFormSchema = z.infer<typeof loginFormSchema>;
 
-export const Login = ({ closeModal }: LoginProps) => {
-  const { setModalSelect } = useModalSelectState();
+export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
+  // const { setModalSelect } = useModalSelectState();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const {

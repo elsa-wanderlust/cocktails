@@ -2,15 +2,15 @@ import type { FieldValues } from "react-hook-form";
 import Image from "next/image";
 import closeIcon from "../../images/icons/close.svg";
 import { deleteCookie } from "cookies-next";
-import { useModalSelectState } from "@/state/modalSelectState";
+// import { useModalSelectState } from "@/state/modalSelectState";
 
 type LogoutProps = {
   closeModal: () => void;
-  // setModalSelect: React.Dispatch<React.SetStateAction<string>>;
+  setModalSelect: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const Logout = ({ closeModal }: LogoutProps) => {
-  const { setModalSelect } = useModalSelectState();
+export const Logout = ({ closeModal, setModalSelect }: LogoutProps) => {
+  // const { setModalSelect } = useModalSelectState();
 
   const logout = () => {
     deleteCookie("cocktails");

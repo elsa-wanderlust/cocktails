@@ -1,6 +1,7 @@
-import Link from "next/link";
 // import { useState } from "react";
 // import ModalFrame from "./Modal/ModalFrame";
+import Image from "next/image";
+import Link from "next/link";
 
 type CocktailProps = {
   info: {
@@ -70,11 +71,13 @@ const Cocktail = ({ info }: CocktailProps) => {
     >
       <div>
         {info.strDrinkThumb && (
-          <img
+          <Image
             src={info.strDrinkThumb}
             alt={`image of a cocktail: ${info.strDrink}`}
-            height="100%"
-            width="100%"
+            // height="100%"
+            // width="100%"
+            height="200"
+            width="200"
           />
         )}
         <h3>{info.strDrink}</h3>

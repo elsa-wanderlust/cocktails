@@ -11,29 +11,36 @@ import ModalFrame from "./Modal/ModalFrame";
 import TopMenuData from "@/data/topMenuData";
 import backgroundImage from "../images/header_bg.jpg";
 import { hasCookie } from "cookies-next";
-import { useModalSelectState } from "@/state/modalSelectState";
+import { useIsConnectedState } from "@/state/modalSelectState";
+
+// import { useModalSelectState } from "@/state/modalSelectState";
 
 export default function Example() {
-  // const cookies = useCookies();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modalOpen, setmodalOpen] = useState(false);
   // const [modalSelect, setModalSelect] = useState(""); // values: login - signup - logout
-  const { modalSelect, setModalSelect } = useModalSelectState();
+  // const { modalSelect, setModalSelect } = useModalSelectState();
+  const { isConnected, setIsConnected } = useIsConnectedState();
 
   useEffect(() => {
-    // const cookies = useCookies();
-    const checkConnection = () => {
-      // const savedCookie = cookies.get("cocktails");
-      const savedCookie = hasCookie("cocktails");
+    const cookieSaved = hasCookie("cocktails");
+    if (cookieSaved) {
+      setIsConnected(true);
+    }
 
-      if (savedCookie) {
-        setModalSelect("logout");
-      } else {
-        setModalSelect("signup");
-      }
-    };
-    checkConnection();
-  }, []);
+    // // const cookies = useCookies();
+    // const checkConnection = () => {
+    //   // const savedCookie = cookies.get("cocktails");
+    //   const savedCookie = hasCookie("cocktails");
+
+    //   if (savedCookie) {
+    //     setModalSelect("logout");
+    //   } else {
+    //     setModalSelect("signup");
+    //   }
+    // };
+    // checkConnection();
+  }, [setIsConnected]);
 
   return (
     <header className="sticky top-0">
@@ -116,11 +123,12 @@ export default function Example() {
                 }}
                 className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
               >
+                {isConnected ? "Logout" : "Login / Sign up"}
                 {/* {modalTitle ? item.section[1] : item.section[0]} */}
                 {/* {modalTitle} */}
-                {modalSelect === "login" || modalSelect === "signup"
+                {/* {modalSelect === "login" || modalSelect === "signup"
                   ? "Login / Sign up"
-                  : "Logout"}
+                  : "Logout"} */}
               </p>
             );
           } else {

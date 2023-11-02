@@ -7,20 +7,20 @@ import eye from "../../images/icons/eye.svg";
 import { setCookie } from "cookies-next";
 import { signupFormSchema } from "@/app/lib/validations/signupFormSchema";
 import { useForm } from "react-hook-form";
-import { useModalSelectState } from "@/state/modalSelectState";
+// import { useModalSelectState } from "@/state/modalSelectState";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type SignupProps = {
   closeModal: () => void;
-  // setModalSelect: React.Dispatch<React.SetStateAction<string>>;
+  setModalSelect: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type TSignupFormSchema = z.infer<typeof signupFormSchema>;
 
-export const Signup = ({ closeModal }: SignupProps) => {
-  const { setModalSelect } = useModalSelectState();
+export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
+  // const { setModalSelect } = useModalSelectState();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confPasswordVisible, setConfPasswordVisible] = useState(false);
   // const cookies = useCookies();
