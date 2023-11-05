@@ -16,13 +16,7 @@ type CocktailProps = {
     strAlcoholic?: string;
     strGlass?: string;
     strInstructions?: string;
-    // strInstructionsES?: string;
-    // strInstructionsDE?: string;
-    // strInstructionsFR?: string;
-    // strInstructionsIT?: string;
-    // strInstructionsZH-HANS: null,
-    // strInstructionsZH-HANT: null,
-    strDrinkThumb?: string;
+    strDrinkThumb: string;
     strIngredient1?: string;
     strIngredient2?: string;
     strIngredient3?: string;
@@ -80,9 +74,6 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
               <Image
                 src={info.strDrinkThumb}
                 alt={`image of a cocktail: ${info.strDrink}`}
-                // height="100%"
-                // width="100%"
-                // layout="fill"
                 objectFit="contain"
                 height="400"
                 width="400"

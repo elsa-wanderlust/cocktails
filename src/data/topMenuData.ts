@@ -1,38 +1,18 @@
-const TopMenuData = [
+export const cocktailSearchMenu = [
   {
-    section: "Cocktail of the day",
-    url: "/",
-    modal: false,
+    subTitle: "...by name",
+    url: "/searchByName",
   },
   {
-    section: "Find a cocktail",
-    elements: [
-      {
-        subSection: "...by name",
-        url: "/searchByName",
-      },
-      {
-        subSection: "...by ingredient",
-        url: "/searchByIngredient",
-      },
-      {
-        subSection: "...by category",
-        url: "/searchByCategory",
-      },
-      {
-        subSection: "...by glass",
-        url: "/searchByGlass",
-      },
-    ],
+    subTitle: "...by ingredient",
+    url: "/searchByIngredient",
   },
   {
-    section: "My favorite Cocktails",
-    url: "/favorites",
+    subTitle: "...by category",
+    url: "/searchByCategory",
   },
   {
-    section: ["Login / Sign up", "Log out"],
-    url: "modal",
+    subTitle: "...by glass",
+    url: "/searchByGlass",
   },
 ];
-
-export default TopMenuData;
