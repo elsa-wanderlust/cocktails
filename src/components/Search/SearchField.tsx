@@ -1,7 +1,8 @@
-// import routes
-import { fetchresults } from "@/app/api/cocktailRoutes";
 // "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// import routes
+import { fetchResults } from "@/app/api/cocktailRoutes";
 
 type Input = {
   target: {
@@ -78,31 +79,39 @@ const SearchField = ({
   // declare states
   const [input, setInput] = useState("");
 
+  useEffect(() => {
+    const getPreviousSearch = async () => {
+      const search = localStorage.getItem(`search${searchPage}`) || "";
+      setInput(search);
+      const cocktailsFound = await fetchResults(search, searchPage);
+      if (cocktailsFound) {
+        setData(cocktailsFound);
+        setIsLoading(false);
+      }
+    };
+    getPreviousSearch();
+  }, [searchPage, setData, setIsLoading]);
+
   const handleInput = async (input: Input) => {
     if (input.target) {
+      localStorage.setItem(`search${searchPage}`, input.target.value);
       setInput(input.target.value);
-      if (input.target.value.length > 2) {
-        setIsLoading(true);
-        const cocktailsFound = await fetchresults(
-          input.target.value,
-          searchPage
-        );
-        console.log("----@@Cocktail Found", cocktailsFound);
-        if (cocktailsFound) {
-          setData(cocktailsFound);
-          setIsLoading(false);
-        }
+      setIsLoading(true);
+      const cocktailsFound = await fetchResults(input.target.value, searchPage);
+      if (cocktailsFound) {
+        setData(cocktailsFound);
+        setIsLoading(false);
       }
     }
   };
 
   // declare variables
-  const searchKeyWords = {
-    s: "the name of a cocktail",
-    i: "the name of an ingredient",
-    c: "a category cocktail",
-    g: "a type of cocktail glass",
-  };
+  // const searchKeyWords = {
+  //   s: "the name of a cocktail",
+  //   i: "the name of an ingredient",
+  //   c: "a category cocktail",
+  //   g: "a type of cocktail glass",
+  // };
 
   return (
     <div className="h-80% flex gap-10">
@@ -112,7 +121,7 @@ const SearchField = ({
         placeholder={`type a cocktail ${
           searchPage === "s" ? "name" : "ingredient"
         }`}
-        className="block rounded-md border-0 p-5 py-1.5 w-1/3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-700 sm:text-sm sm:leading-6"
+        className="block rounded-md border-0 p-5 py-1.5 w-1/3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:border-green-700 focus:ring-green-700 sm:text-sm sm:leading-6"
         onChange={handleInput}
         value={input}
       />

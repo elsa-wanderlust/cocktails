@@ -1,7 +1,8 @@
 // "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 // import routes
-import { fetchresults } from "@/app/api/cocktailRoutes";
+import { fetchResults } from "@/app/api/cocktailRoutes";
 
 type CocktailProps = {
   idDrink: string;
@@ -79,11 +80,25 @@ const Checkboxes = ({
 }: CheckboxesProps) => {
   const [selection, setSelection] = useState("");
 
+  useEffect(() => {
+    const getPreviousSearch = async () => {
+      const search = localStorage.getItem(`search${searchPage}`) || "";
+      setSelection(search);
+      const cocktailsFound = await fetchResults(search, searchPage);
+      if (cocktailsFound) {
+        setData(cocktailsFound);
+        setIsLoading(false);
+      }
+    };
+    getPreviousSearch();
+  }, [searchPage, setData, setIsLoading]);
+
   const handleSelect = async (select: Select) => {
     setSelection(select.target.name);
+    localStorage.setItem(`search${searchPage}`, select.target.name);
     setIsLoading(true);
     const searchGlassFormatted = select.target.name.replace(" ", "_");
-    const cocktailsFound = await fetchresults(searchGlassFormatted, searchPage);
+    const cocktailsFound = await fetchResults(searchGlassFormatted, searchPage);
     if (cocktailsFound) {
       setData(cocktailsFound);
       setIsLoading(false);
@@ -92,10 +107,13 @@ const Checkboxes = ({
 
   return (
     <fieldset className="">
-      <legend className="text-base font-semibold leading-6 text-gray-900 py-4">
-        Select at least one type of cocktail glass
-      </legend>
-      <div className=" border-t border-red-200 border-2 flex flex-wrap gap-10 pb-4">
+      <h2>
+        Select a
+        {searchPage === "c"
+          ? " category of cocktail"
+          : " type of cocktail glass"}
+      </h2>
+      <div className="flex flex-wrap gap-10 pb-4">
         {data.map((glass) => (
           <div key={glass} className="relative flex items-start pb-2 w-1/6">
             <div className="min-w-0 flex-1 text-sm leading-6">

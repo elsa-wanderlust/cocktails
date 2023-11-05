@@ -2,7 +2,7 @@
 // req = input/filter
 // searchType = 's' if search by name, 'i' if by ingredient, 'c' if by category and 'g' by glass
 
-export async function fetchresults(req: string, searchType: string) {
+export async function fetchResults(req: string, searchType: string) {
   try {
     const res = await fetch(
       `https://www.thecocktaildb.com/api/json/v1/1/${
