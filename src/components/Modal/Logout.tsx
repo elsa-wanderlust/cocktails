@@ -17,7 +17,7 @@ export const Logout = ({ closeModal }: LogoutProps) => {
 
   const logout = () => {
     deleteCookie("cocktails");
-    setIsConnected(false);
+    setIsConnected("none");
     // setModalSelect("signup");
     closeModal();
     alert("you are logged out");

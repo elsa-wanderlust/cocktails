@@ -45,7 +45,7 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
         throw new Error(responseData.message);
       } else {
         setCookie("cocktails", responseData.token);
-        setIsConnected(true);
+        setIsConnected(responseData.token);
         // setModalSelect("logout");
         closeModal();
         alert("you are logged in");

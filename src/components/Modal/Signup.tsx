@@ -48,7 +48,7 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
         throw new Error(responseData.message);
       } else {
         setCookie("cocktails", responseData.token);
-        setIsConnected(true);
+        setIsConnected(responseData.token);
         // setModalSelect("logout");
         closeModal();
         alert("your account has been created");
