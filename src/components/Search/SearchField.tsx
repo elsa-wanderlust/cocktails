@@ -1,8 +1,8 @@
+// import routes
+import { cocktailDetails, fetchResults } from "@/app/api/cocktailRoutes";
 // "use client";
 import { useEffect, useState } from "react";
-
-// import routes
-import { fetchResults } from "@/app/api/cocktailRoutes";
+import { useRouter, useSearchParams } from "next/navigation"; // elsa next/navigation?
 
 type Input = {
   target: {
@@ -76,42 +76,35 @@ const SearchField = ({
   setIsLoading,
   setData,
 }: SearchFieldProps) => {
-  // declare states
-  const [input, setInput] = useState("");
+  const searchParams = useSearchParams();
+  const input = searchParams.get(searchPage);
+  const router = useRouter();
 
   useEffect(() => {
-    const getPreviousSearch = async () => {
-      const search = localStorage.getItem(`search${searchPage}`) || "";
-      setInput(search);
-      const cocktailsFound = await fetchResults(search, searchPage);
-      if (cocktailsFound) {
-        setData(cocktailsFound);
-        setIsLoading(false);
+    const searchCocktails = async () => {
+      try {
+        if (input) {
+          setIsLoading(true);
+          const cocktailsFound = await fetchResults(input, searchPage);
+          if (cocktailsFound) {
+            setData(cocktailsFound);
+            setIsLoading(false);
+          } else {
+            throw "there are no cocktails matching you search";
+          }
+        } else if (input === "") {
+          setData([]);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
-    getPreviousSearch();
-  }, [searchPage, setData, setIsLoading]);
+    searchCocktails();
+  }, [input, searchPage, setData, setIsLoading]);
 
   const handleInput = async (input: Input) => {
-    if (input.target) {
-      localStorage.setItem(`search${searchPage}`, input.target.value);
-      setInput(input.target.value);
-      setIsLoading(true);
-      const cocktailsFound = await fetchResults(input.target.value, searchPage);
-      if (cocktailsFound) {
-        setData(cocktailsFound);
-        setIsLoading(false);
-      }
-    }
+    router.push(`?${searchPage}=${input.target.value}`), { scroll: false };
   };
-
-  // declare variables
-  // const searchKeyWords = {
-  //   s: "the name of a cocktail",
-  //   i: "the name of an ingredient",
-  //   c: "a category cocktail",
-  //   g: "a type of cocktail glass",
-  // };
 
   return (
     <div className="h-80% flex gap-10">
@@ -123,10 +116,9 @@ const SearchField = ({
         }`}
         className="block rounded-md border-0 p-5 py-1.5 w-1/3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:border-green-700 focus:ring-green-700 sm:text-sm sm:leading-6"
         onChange={handleInput}
-        value={input}
+        value={input ? input : ""}
       />
     </div>
   );
 };
-
 export default SearchField;

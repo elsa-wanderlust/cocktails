@@ -85,9 +85,9 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
         <div className="w-2/3">
           <h4>Ingredients</h4>
           <div className="list-disc list-inside	flex flex-wrap gap-3">
-            {ingredientsList.map((item, index) => {
+            {ingredientsList.map((item) => {
               return (
-                <div className="w-60" key={index}>
+                <div className="w-60" key={item}>
                   <li>{item}</li>
                 </div>
               );

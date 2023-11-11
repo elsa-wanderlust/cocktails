@@ -19,6 +19,6 @@ interface IsConnectedState {
 }
 
 export const useIsConnectedState = create<IsConnectedState>()((set) => ({
-  isConnected: false,
+  isConnected: false, // should get the token
   setIsConnected: (isConnected: boolean) => set({ isConnected }),
 }));

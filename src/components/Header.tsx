@@ -43,7 +43,7 @@ export default function Example() {
   ];
 
   return (
-    <header className="sticky top-0">
+    <header className="sticky top-0 z-20">
       <div className="absolute inset-0 overflow-y-hidden opacity-95">
         <Image src={backgroundImage} alt="backgroundImage" />
       </div>
@@ -91,7 +91,7 @@ export default function Example() {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-green-900/5">
+                <Popover.Panel className="absolute -left-8 top-full z-20 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-green-900/5">
                   <div className="p-4">
                     {cocktailSearchMenu.map((item) => (
                       <div

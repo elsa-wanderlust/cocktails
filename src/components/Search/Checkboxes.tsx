@@ -114,24 +114,24 @@ const Checkboxes = ({
           : " type of cocktail glass"}
       </h2>
       <div className="flex flex-wrap gap-10 pb-4">
-        {data.map((glass) => (
-          <div key={glass} className="relative flex items-start pb-2 w-1/6">
+        {data.map((item) => (
+          <div key={item} className="relative flex items-start pb-2 w-1/6">
             <div className="min-w-0 flex-1 text-sm leading-6">
               <label
-                htmlFor={glass}
+                htmlFor={item}
                 className="select-none font-medium text-gray-900"
               >
-                {glass}
+                {item}
               </label>
             </div>
             <div className="ml-3 flex h-6 items-center">
               <input
-                id={glass}
-                name={glass}
+                id={item}
+                name={item}
                 type="checkbox"
                 className="h-4 w-4"
                 onChange={handleSelect}
-                checked={selection === glass ? true : false}
+                checked={selection === item ? true : false}
               />
             </div>
           </div>

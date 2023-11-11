@@ -1,5 +1,3 @@
-// import { useState } from "react";
-// import ModalFrame from "./Modal/ModalFrame";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -60,34 +58,25 @@ type CocktailCardProps = {
 };
 
 const CocktailCard = ({ info }: CocktailCardProps) => {
-  // const [modalOpen, setmodalOpen] = useState(false);
   return (
     <Link
       href={`/cocktail/${info.idDrink}`}
-      className="border border-green-950 w-1/6 flex flex-col items-center bg-green-50"
-      // onClick={() => {
-      //   setmodalOpen(true);
-      // }}
+      className="border border-green-950 w-1/6 aspect-[4/5] rounded-sm flex flex-col items-center bg-green-50 hover:brightness-50 hover:z-auto"
     >
-      <div>
+      <div className="w-full h-full relative">
         {info.strDrinkThumb && (
           <Image
             src={info.strDrinkThumb}
             alt={`image of a cocktail: ${info.strDrink}`}
-            // height="100%"
-            // width="100%"
-            height="200"
-            width="200"
+            fill
+            objectFit="cover"
+            loading="lazy"
           />
         )}
-        <h3>{info.strDrink}</h3>
+        <p className="absolute bottom-2  px-1 rounded-lg mx-2 line-clamp-1 backdrop-brightness-75 text-white">
+          {info.strDrink}
+        </p>
       </div>
-      {/* <ModalFrame
-        modalOpen={modalOpen}
-        closeModal={() => {
-          setmodalOpen(false);
-        }}
-      /> */}
     </Link>
   );
 };

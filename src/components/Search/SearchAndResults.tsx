@@ -95,8 +95,8 @@ const SearchAndResults = ({ searchPage }: searchTypeProps) => {
             We have found {data.length} cocktail{data.length > 1 && "s"}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            {data.map((item, index) => {
-              return <CocktailCard key={index} info={item} />;
+            {data.map((item) => {
+              return <CocktailCard key={item.idDrink} info={item} />;
             })}
           </div>
         </div>
