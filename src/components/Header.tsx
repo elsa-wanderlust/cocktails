@@ -25,25 +25,6 @@ export default function Example() {
     }
   }, [setIsConnected]);
 
-  const findACocktailDetails = [
-    {
-      subTitle: "...by name",
-      url: "/searchByName",
-    },
-    {
-      subTitle: "...by ingredient",
-      url: "/searchByIngredient",
-    },
-    {
-      subTitle: "...by category",
-      url: "/searchByCategory",
-    },
-    {
-      subTitle: "...by glass",
-      url: "/searchByGlass",
-    },
-  ];
-
   return (
     <header className="sticky top-0 z-20">
       <div className="absolute inset-0 overflow-y-hidden opacity-95">
@@ -119,7 +100,7 @@ export default function Example() {
                 </Popover>
               </Popover.Group>
             </>
-            {isConnected && (
+            {isConnected !== "none" && (
               <a
                 href="/favorites"
                 className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"

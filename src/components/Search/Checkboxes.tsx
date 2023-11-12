@@ -1,26 +1,18 @@
-// "use client";
 import { useEffect, useState } from "react";
 
-// import routes
 import { fetchResults } from "@/app/api/cocktailRoutes";
 
 type CocktailProps = {
   idDrink: string;
   strDrink: string;
   strDrinkAlternate?: string;
-  strTags?: string; // elsa TBC
-  strVideo?: string; // elsa TBC,
+  strTags?: string;
+  strVideo?: string;
   strCategory: string;
   strIBA?: string;
   strAlcoholic?: string;
   strGlass?: string;
   strInstructions?: string;
-  // strInstructionsES?: string;
-  // strInstructionsDE?: string;
-  // strInstructionsFR?: string;
-  // strInstructionsIT?: string;
-  // strInstructionsZH-HANS: null,
-  // strInstructionsZH-HANT: null,
   strDrinkThumb?: string;
   strIngredient1?: string;
   strIngredient2?: string;
@@ -61,7 +53,6 @@ type CocktailProps = {
 type CheckboxesProps = {
   data: string[];
   searchPage: string;
-  // isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setData: React.Dispatch<React.SetStateAction<CocktailProps[]>>;
 };
@@ -74,7 +65,6 @@ type Select = {
 const Checkboxes = ({
   data,
   searchPage,
-  // isLoading,
   setIsLoading,
   setData,
 }: CheckboxesProps) => {

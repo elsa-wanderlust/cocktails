@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import ModalFrame from "./Modal/ModalFrame";
 import { getCookie } from "cookies-next";
-import { hasCookie } from "cookies-next";
 import loveIconBlack from "../images/icons/loveBlack.svg";
 import loveIconRed from "../images/icons/loveRed.svg";
 
@@ -37,7 +36,6 @@ const FavortiesIcons = ({
         if (!response.ok) {
           throw new Error(responseData.message);
         } else {
-          // alert("haha saved");
           setIsDrinkFav(!isDrinkFav);
         }
       } catch (error: any) {
@@ -77,7 +75,7 @@ const FavortiesIcons = ({
 
   return (
     <div className="flex gap-10 ml-10">
-      <div className="relative group">
+      <div>
         <Image
           src={isDrinkFav ? loveIconRed : loveIconBlack}
           alt="love"

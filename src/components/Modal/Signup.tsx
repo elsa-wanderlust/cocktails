@@ -7,7 +7,6 @@ import eye from "../../images/icons/eye.svg";
 import { setCookie } from "cookies-next";
 import { signupFormSchema } from "@/app/lib/validations/signupFormSchema";
 import { useForm } from "react-hook-form";
-// import { useModalSelectState } from "@/state/modalSelectState";
 import { useIsConnectedState } from "@/state/modalSelectState";
 import { useState } from "react";
 import { z } from "zod";
@@ -21,10 +20,8 @@ type SignupProps = {
 type TSignupFormSchema = z.infer<typeof signupFormSchema>;
 
 export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
-  // const { setModalSelect } = useModalSelectState();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confPasswordVisible, setConfPasswordVisible] = useState(false);
-  // const cookies = useCookies();
   const { setIsConnected } = useIsConnectedState();
 
   const {
@@ -49,7 +46,6 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
       } else {
         setCookie("cocktails", responseData.token);
         setIsConnected(responseData.token);
-        // setModalSelect("logout");
         closeModal();
         alert("your account has been created");
       }

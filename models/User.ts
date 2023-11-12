@@ -32,10 +32,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
       },
-      // status: {
-      //   type: String,
-      //   required: true,
-      // },
       note: {
         type: String,
       },

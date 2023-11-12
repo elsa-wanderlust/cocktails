@@ -1,12 +1,8 @@
 import "./globals.css";
-import type { Metadata } from "next";
 
-// import components
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-// import { Inter } from "next/font/google";
-// const inter = Inter({ subsets: ["latin"] });
+import Header from "@/components/Header";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Cocktails",

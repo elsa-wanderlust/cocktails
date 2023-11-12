@@ -3,23 +3,16 @@
 // [{"ingredient1 : qty 1"}, {"ingredient2 : qty 2"}, {"ingredient3 : qty 3"}]
 
 type CocktailInfos = {
-  // info: {
   idDrink: string;
   strDrink: string;
   strDrinkAlternate?: string;
-  strTags?: string; // elsa TBC
-  strVideo?: string; // elsa TBC,
+  strTags?: string;
+  strVideo?: string;
   strCategory: string;
   strIBA?: string;
   strAlcoholic?: string;
   strGlass?: string;
   strInstructions?: string;
-  // strInstructionsES?: string;
-  // strInstructionsDE?: string;
-  // strInstructionsFR?: string;
-  // strInstructionsIT?: string;
-  // strInstructionsZH-HANS: null,
-  // strInstructionsZH-HANT: null,
   strDrinkThumb?: string;
   strIngredient1?: string;
   strIngredient2?: string;
@@ -54,37 +47,7 @@ type CocktailInfos = {
   strImageSource?: string;
   strImageAttribution?: string;
   strCreativeCommonsConfirmed?: string;
-  // dateModified?: string;
-  // ingredientNumber?: string;
-  // };
 };
-
-type oneIngredient = {
-  ingredientName?: string;
-  ingredientQty?: string;
-};
-
-// const handleIngredients = (info: CocktailInfos) => {
-//   const ingredientsList = [];
-//   for (let i = 1; i < 16; i++) {
-//     let ingredientNumber: string = "strIngredient" + i;
-//     let qtyNumber: string = "strMeasure" + i;
-//     if (
-//       info[ingredientNumber as keyof typeof info] &&
-//       info[qtyNumber as keyof typeof info]
-//     ) {
-//       let oneIngredient: oneIngredient = {
-//         ingredientName: "",
-//         ingredientQty: "",
-//       };
-//       oneIngredient.ingredientName =
-//         info[ingredientNumber as keyof typeof info];
-//       oneIngredient.ingredientQty = info[qtyNumber as keyof typeof info];
-//       ingredientsList.push(oneIngredient);
-//     }
-//   }
-//   return ingredientsList;
-// };
 
 const handleIngredients = (info: CocktailInfos) => {
   const ingredientsList = [];
@@ -95,13 +58,6 @@ const handleIngredients = (info: CocktailInfos) => {
       info[ingredientNumber as keyof typeof info] &&
       info[qtyNumber as keyof typeof info]
     ) {
-      // let oneIngredient: oneIngredient = {
-      //   ingredientName: "",
-      //   ingredientQty: "",
-      // };
-      // oneIngredient.ingredientName =
-      //   info[ingredientNumber as keyof typeof info];
-      // oneIngredient.ingredientQty = info[qtyNumber as keyof typeof info];
       ingredientsList.push(
         `${info[qtyNumber as keyof typeof info]}: ${
           info[ingredientNumber as keyof typeof info]

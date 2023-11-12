@@ -1,8 +1,7 @@
-// import routes
-import { cocktailDetails, fetchResults } from "@/app/api/cocktailRoutes";
-// "use client";
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation"; // elsa next/navigation?
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { fetchResults } from "@/app/api/cocktailRoutes";
+import { useEffect } from "react";
 
 type Input = {
   target: {
@@ -13,19 +12,13 @@ type CocktailProps = {
   idDrink: string;
   strDrink: string;
   strDrinkAlternate?: string;
-  strTags?: string; // elsa TBC
-  strVideo?: string; // elsa TBC,
+  strTags?: string;
+  strVideo?: string;
   strCategory: string;
   strIBA?: string;
   strAlcoholic?: string;
   strGlass?: string;
   strInstructions?: string;
-  // strInstructionsES?: string;
-  // strInstructionsDE?: string;
-  // strInstructionsFR?: string;
-  // strInstructionsIT?: string;
-  // strInstructionsZH-HANS: null,
-  // strInstructionsZH-HANT: null,
   strDrinkThumb?: string;
   strIngredient1?: string;
   strIngredient2?: string;
@@ -65,14 +58,12 @@ type CocktailProps = {
 
 type SearchFieldProps = {
   searchPage: string;
-  // isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setData: React.Dispatch<React.SetStateAction<CocktailProps[]>>;
 };
 
 const SearchField = ({
   searchPage,
-  // isLoading,
   setIsLoading,
   setData,
 }: SearchFieldProps) => {

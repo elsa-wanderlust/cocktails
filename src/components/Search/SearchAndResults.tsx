@@ -1,11 +1,9 @@
 "use client";
 
 import Checkboxes from "./Checkboxes";
-// import components
 import CocktailCard from "../CocktailCard";
 import SearchField from "./SearchField";
 import { categories } from "@/data/cocktailsData";
-// import data
 import { glasses } from "@/data/cocktailsData";
 import { useState } from "react";
 
@@ -16,19 +14,13 @@ type CocktailProps = {
   idDrink: string;
   strDrink: string;
   strDrinkAlternate?: string;
-  strTags?: string; // elsa TBC
-  strVideo?: string; // elsa TBC,
+  strTags?: string;
+  strVideo?: string;
   strCategory: string;
   strIBA?: string;
   strAlcoholic?: string;
   strGlass?: string;
   strInstructions?: string;
-  // strInstructionsES?: string;
-  // strInstructionsDE?: string;
-  // strInstructionsFR?: string;
-  // strInstructionsIT?: string;
-  // strInstructionsZH-HANS: null,
-  // strInstructionsZH-HANT: null,
   strDrinkThumb?: string;
   strIngredient1?: string;
   strIngredient2?: string;
@@ -67,7 +59,6 @@ type CocktailProps = {
 };
 
 const SearchAndResults = ({ searchPage }: searchTypeProps) => {
-  // declare states
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<CocktailProps[]>([]);
 
@@ -76,7 +67,6 @@ const SearchAndResults = ({ searchPage }: searchTypeProps) => {
       {searchPage === "s" || searchPage === "i" ? (
         <SearchField
           searchPage={searchPage}
-          // isLoading={isLoading}
           setIsLoading={setIsLoading}
           setData={setData}
         />
@@ -84,7 +74,6 @@ const SearchAndResults = ({ searchPage }: searchTypeProps) => {
         <Checkboxes
           data={searchPage === "g" ? glasses : categories}
           searchPage={searchPage}
-          // isLoading={isLoading}
           setIsLoading={setIsLoading}
           setData={setData}
         />

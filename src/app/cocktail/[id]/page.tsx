@@ -1,5 +1,5 @@
-// import components
 import CocktailDetailed from "@/components/CocktailDetailed";
+import { notFound } from "next/navigation";
 
 type CocktailIdPageProps = {
   params: {
@@ -8,6 +8,7 @@ type CocktailIdPageProps = {
 };
 
 const getCocktailDetails = async (req: string) => {
+  console.log("-----req", req);
   try {
     const res = await fetch(
       `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${req}`
@@ -23,7 +24,7 @@ const CocktailIdPage = async ({ params }: CocktailIdPageProps) => {
   const cocktailInfo = await getCocktailDetails(params.id);
   return (
     <div>
-      <CocktailDetailed info={cocktailInfo} />
+      {cocktailInfo ? <CocktailDetailed info={cocktailInfo} /> : notFound()}
     </div>
   );
 };

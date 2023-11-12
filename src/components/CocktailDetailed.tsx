@@ -1,7 +1,5 @@
-// import components
 import FavortiesIcons from "./FavoritesIcons";
 import Image from "next/image";
-// import function
 import handleIngredients from "@/utils/handleIngredients";
 
 type CocktailProps = {
@@ -9,8 +7,8 @@ type CocktailProps = {
     idDrink: string;
     strDrink: string;
     strDrinkAlternate?: string;
-    strTags?: string; // elsa TBC
-    strVideo?: string; // elsa TBC,
+    strTags?: string;
+    strVideo?: string;
     strCategory: string;
     strIBA?: string;
     strAlcoholic?: string;
@@ -59,54 +57,89 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
   const ingredientsList = handleIngredients(info);
   return (
     <div className="flex flex-col">
-      <div className="flex justify-between items-center">
-        <h1 className="justify-center">{info.strDrink}</h1>
-        <FavortiesIcons
-          idDrink={info.idDrink}
-          strDrink={info.strDrink}
-          strDrinkThumb={info.strDrinkThumb}
+      <div className="absolute inset-0 overflow-y-hidden opacity-50 w-full h-full">
+        <Image
+          src={info.strDrinkThumb}
+          alt="backgroundImage"
+          fill
+          objectFit="cover"
         />
       </div>
-      <div className="flex gap-8">
-        <div className="w-1/3">
-          {info.strDrinkThumb && (
-            <div className="border-black border bg-black p-1">
-              <Image
-                src={info.strDrinkThumb}
-                alt={`image of a cocktail: ${info.strDrink}`}
-                objectFit="contain"
-                height="400"
-                width="400"
-                style={{ borderRadius: "10%" }}
-              />
-            </div>
-          )}
+      <div className="z-10">
+        <div className="flex justify-between items-center">
+          <h1 className="justify-center">{info.strDrink}</h1>
+          <FavortiesIcons
+            idDrink={info.idDrink}
+            strDrink={info.strDrink}
+            strDrinkThumb={info.strDrinkThumb}
+          />
         </div>
-        <div className="w-2/3">
-          <h4>Ingredients</h4>
-          <div className="list-disc list-inside	flex flex-wrap gap-3">
-            {ingredientsList.map((item) => {
-              return (
-                <div className="w-60" key={item}>
-                  <li>{item}</li>
-                </div>
-              );
-            })}
+        <div className="flex gap-8">
+          <div className="w-1/3">
+            {info.strDrinkThumb && (
+              <div className="border-black border bg-black p-1">
+                <Image
+                  src={info.strDrinkThumb}
+                  alt={`image of a cocktail: ${info.strDrink}`}
+                  objectFit="contain"
+                  height="400"
+                  width="400"
+                  style={{ borderRadius: "10%" }}
+                />
+              </div>
+            )}
           </div>
-          <h4>Instructions</h4>
-          {info.strInstructions}
-          <div className="flex gap-24">
-            <div>
-              <h4>Type of glass</h4>
-              {info.strGlass}
-            </div>
-            <div>
-              <h4>Alcohol content</h4>
-              {info.strAlcoholic}
-            </div>
-            <div>
-              <h4>Category</h4>
-              {info.strCategory}
+
+          <div className="w-2/3">
+            <h4>Ingredients</h4>
+            {ingredientsList.length ? (
+              <div className="list-disc list-inside	flex flex-wrap gap-3">
+                {ingredientsList.map((item) => {
+                  return (
+                    <div className="w-60" key={item}>
+                      <li>{item}</li>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="italic">
+                There is no ingredient listed for this cocktail
+              </p>
+            )}
+            <h4>Instructions</h4>
+            {info.strInstructions ? (
+              info.strInstructions
+            ) : (
+              <p className="italic">
+                There is no instruction listed for this cocktail
+              </p>
+            )}
+            <div className="flex gap-24">
+              <div>
+                <h4>Type of glass</h4>
+                {info.strGlass ? (
+                  info.strGlass
+                ) : (
+                  <p className="italic">not available</p>
+                )}
+              </div>
+              <div>
+                <h4>Alcohol content</h4>
+                {info.strAlcoholic ? (
+                  info.strAlcoholic
+                ) : (
+                  <p className="italic">not available</p>
+                )}
+              </div>
+              <div>
+                <h4>Category</h4>
+                {info.strCategory ? (
+                  info.strCategory
+                ) : (
+                  <p className="italic">not available</p>
+                )}
+              </div>
             </div>
           </div>
         </div>

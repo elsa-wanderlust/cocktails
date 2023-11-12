@@ -7,27 +7,17 @@ import { Login } from "./Login";
 import { Logout } from "./Logout";
 import { Signup } from "./Signup";
 import { useIsConnectedState } from "@/state/modalSelectState";
-// import { useModalSelectState } from "@/state/modalSelectState";
 import { useState } from "react";
 
 type ModalProps = {
   modalOpen: boolean;
   closeModal: () => void;
-  // modalSelect: string;
-  // setModalSelect: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const ModalFrame = ({
-  modalOpen,
-  closeModal,
-}: // modalSelect,
-// setModalSelect,
-ModalProps) => {
-  // const { modalSelect } = useModalSelectState();
+const ModalFrame = ({ modalOpen, closeModal }: ModalProps) => {
   const { isConnected } = useIsConnectedState();
-  const [modalSelect, setModalSelect] = useState(
-    isConnected ? "logout" : "signup"
-  );
+  const [modalSelect, setModalSelect] = useState("signup");
+
   return (
     <>
       <Transition appear show={modalOpen} as={Fragment}>
@@ -55,20 +45,17 @@ ModalProps) => {
                 leaveTo="opacity-0 scale-50"
               >
                 <Dialog.Panel className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white text-left shadow-xl transition-all flex flex-col">
-                  {modalSelect === "signup" ? (
+                  {isConnected !== "none" ? (
+                    <Logout closeModal={closeModal} />
+                  ) : modalSelect === "signup" ? (
                     <Signup
                       closeModal={closeModal}
                       setModalSelect={setModalSelect}
                     />
-                  ) : modalSelect === "login" ? (
+                  ) : (
                     <Login
                       closeModal={closeModal}
                       setModalSelect={setModalSelect}
-                    />
-                  ) : (
-                    <Logout
-                      closeModal={closeModal}
-                      // setModalSelect={setModalSelect}
                     />
                   )}
                 </Dialog.Panel>

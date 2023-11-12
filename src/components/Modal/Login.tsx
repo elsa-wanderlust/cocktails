@@ -7,7 +7,6 @@ import { loginFormSchema } from "@/app/lib/validations/loginFormSchema";
 import { setCookie } from "cookies-next";
 import { useForm } from "react-hook-form";
 import { useIsConnectedState } from "@/state/modalSelectState";
-// import { useModalSelectState } from "@/state/modalSelectState";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +18,6 @@ type LoginProps = {
 type TLoginFormSchema = z.infer<typeof loginFormSchema>;
 
 export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
-  // const { setModalSelect } = useModalSelectState();
   const { setIsConnected } = useIsConnectedState();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -46,7 +44,6 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
       } else {
         setCookie("cocktails", responseData.token);
         setIsConnected(responseData.token);
-        // setModalSelect("logout");
         closeModal();
         alert("you are logged in");
       }
