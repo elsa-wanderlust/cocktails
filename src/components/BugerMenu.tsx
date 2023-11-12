@@ -26,34 +26,26 @@ export default function BurgerMenu() {
 
   const cocktailSearchMenu = [
     {
-      subTitle: "...by name",
+      subTitle: "by name",
       url: "/searchByName",
     },
     {
-      subTitle: "...by ingredient",
+      subTitle: "by ingredient",
       url: "/searchByIngredient",
     },
   ];
 
   return (
-    <header className="fixed top-0 z-20 w-20 h-screen bg-green-200 sm:hidden">
-      {/* <div className="absolute inset-0 overflow-y-hidden opacity-95">
-        <Image src={backgroundImage} alt="backgroundImage" />
-      </div> */}
-      {/* <nav
-        className="relative mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 h-24"
+    <div>
+      <nav
+        className="relative mx-auto flex gap-5 flex-col max-w-7xl items-left justify-between p-6 lg:px-8 h-24 text-sm"
         aria-label="Global"
       >
         {isConnected === "" ? null : (
           <>
-            <div className="flex w-3/12 ">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
-              </a>
-            </div>
             <a
               href="/"
-              className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
+              className="-mx-3 block rounded-lg px-3 py-2 font-semibold leading-7 text-green-900 hover:bg-gray-100"
             >
               Random Cocktail
             </a>
@@ -69,7 +61,7 @@ export default function BurgerMenu() {
               </div>
               <Popover.Group className="lg:gap-x-12">
                 <Popover className="relative">
-                  <Popover.Button className="flex items-center gap-x-1 text-medium font-semibold leading-6 text-green-900 outline-none">
+                  <Popover.Button className="-mx-3 flex text-left focus:none px-3 py-2 font-semibold leading-7 text-green-900 hover:bg-gray-100">
                     Find a cocktail
                     <ChevronDownIcon
                       className="h-5 w-5 flex-none text-green-400"
@@ -86,12 +78,12 @@ export default function BurgerMenu() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-1"
                   >
-                    <Popover.Panel className="absolute -left-8 top-full z-20 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-green-900/5">
-                      <div className="p-4">
+                    <Popover.Panel className="absolute -left-6 top-full z-20 w-32 mt-3 wm-conte max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-green-900/5">
+                      <div className="p-2 w-full">
                         {cocktailSearchMenu.map((item) => (
                           <div
                             key={item.subTitle}
-                            className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-200"
+                            className="group relative flex items-center gap-x-1 p-1 text-sm leading-6 hover:bg-gray-200 w-full"
                           >
                             <div className="flex-auto">
                               <a
@@ -113,7 +105,7 @@ export default function BurgerMenu() {
             {isConnected !== "none" && (
               <a
                 href="/favorites"
-                className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
+                className="-mx-3 block rounded-lg px-3 py-2 font-semibold leading-7 text-green-900 hover:bg-gray-100"
               >
                 My favorite Cocktails
               </a>
@@ -122,7 +114,7 @@ export default function BurgerMenu() {
               onClick={() => {
                 setmodalOpen(true);
               }}
-              className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-green-900 hover:bg-gray-100"
+              className="-mx-3 block rounded-lg px-3 py-2 font-semibold leading-7 text-green-900 hover:bg-gray-100"
             >
               {isConnected === "none" ? "Login / Sign up" : "Logout"}
             </p>
@@ -134,7 +126,7 @@ export default function BurgerMenu() {
         closeModal={() => {
           setmodalOpen(false);
         }}
-      /> */}
-    </header>
+      />
+    </div>
   );
 }
