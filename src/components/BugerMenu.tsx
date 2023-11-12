@@ -3,7 +3,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
-import BurgerMenu from "./BugerMenu";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import ModalFrame from "./Modal/ModalFrame";
@@ -11,7 +10,7 @@ import backgroundImage from "../images/header_bg.jpg";
 import { getCookie } from "cookies-next";
 import { useIsConnectedState } from "@/state/modalSelectState";
 
-export default function Header() {
+export default function BurgerMenu() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modalOpen, setmodalOpen] = useState(false);
   const { isConnected, setIsConnected } = useIsConnectedState();
@@ -37,13 +36,12 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 z-20 w-screen h-28">
-      {/* <div className="hidden sm:block"> */}
-      <div className="absolute inset-0 overflow-y-hidden opacity-95">
+    <header className="fixed top-0 z-20 w-20 h-screen bg-green-200 sm:hidden">
+      {/* <div className="absolute inset-0 overflow-y-hidden opacity-95">
         <Image src={backgroundImage} alt="backgroundImage" />
-      </div>
-      <nav
-        className="relative mx-auto sm:flex max-w-7xl items-center justify-between p-6 lg:px-8 h-24 hidden "
+      </div> */}
+      {/* <nav
+        className="relative mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 h-24"
         aria-label="Global"
       >
         {isConnected === "" ? null : (
@@ -136,9 +134,7 @@ export default function Header() {
         closeModal={() => {
           setmodalOpen(false);
         }}
-      />
-      {/* </div> */}
-      <BurgerMenu />
+      /> */}
     </header>
   );
 }

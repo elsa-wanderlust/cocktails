@@ -57,6 +57,7 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
   const ingredientsList = handleIngredients(info);
   return (
     <div className="flex flex-col ">
+      {/* BACKGROUND IMAGE */}
       <div className="inset-0 overflow-y-hidden opacity-50 w-full fixed">
         <Image
           src={info.strDrinkThumb}
@@ -66,6 +67,7 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
         />
       </div>
       <div className="z-10">
+        {/* TITLE AND FAV ICON */}
         <div className="flex justify-between items-center">
           <h1 className="justify-center">{info.strDrink}</h1>
           <FavortiesIcons
@@ -74,8 +76,10 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
             strDrinkThumb={info.strDrinkThumb}
           />
         </div>
-        <div className="flex gap-8">
-          <div className="min-w-[350px]">
+
+        <div className="flex flex-col gap-8 sm:flex-row items-center sm:items-start">
+          {/* PICTURE */}
+          <div className="w-64 lg:w-96">
             {info.strDrinkThumb && (
               <div className="border-black border bg-black p-1">
                 <Image
@@ -89,8 +93,8 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
               </div>
             )}
           </div>
-
-          <div className="w-2/3">
+          {/* COCKTAIL INFO */}
+          <div className="flex-1 left-0">
             <h4>Ingredients</h4>
             {ingredientsList.length ? (
               <div className="list-disc list-inside	flex flex-wrap gap-3">
@@ -107,15 +111,18 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
                 There is no ingredient listed for this cocktail
               </p>
             )}
-            <h4>Instructions</h4>
-            {info.strInstructions ? (
-              info.strInstructions
-            ) : (
-              <p className="italic">
-                There is no instruction listed for this cocktail
-              </p>
-            )}
-            <div className="flex gap-24">
+            <div className="hidden md:block">
+              <h4>Instructions</h4>
+              {info.strInstructions ? (
+                info.strInstructions
+              ) : (
+                <p className="italic">
+                  There is no instruction listed for this cocktail
+                </p>
+              )}
+            </div>
+
+            <div className="hidden gap-24 lg:flex">
               <div>
                 <h4>Type of glass</h4>
                 {info.strGlass ? (
@@ -142,6 +149,17 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
               </div>
             </div>
           </div>
+        </div>
+        {/* INGREDIENTS UNDER PICTURE */}
+        <div className="md:hidden">
+          <h4>Instructions</h4>
+          {info.strInstructions ? (
+            info.strInstructions
+          ) : (
+            <p className="italic">
+              There is no instruction listed for this cocktail
+            </p>
+          )}
         </div>
       </div>
     </div>

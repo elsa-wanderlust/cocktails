@@ -98,7 +98,7 @@ const SearchField = ({
   };
 
   return (
-    <div className="h-80% flex gap-10">
+    <div className="h-80% flex gap-2 flex-col sm:flex-row sm:gap-10 items-center">
       <h2>Search a cocktail by {searchPage === "s" ? "name" : "ingredient"}</h2>
       <input
         type="text"
