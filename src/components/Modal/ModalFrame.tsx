@@ -13,7 +13,6 @@ type ModalProps = {
   modalOpen: boolean;
   closeModal: () => void;
 };
-//
 
 const ModalFrame = ({ modalOpen, closeModal }: ModalProps) => {
   const { isConnected } = useIsConnectedState();

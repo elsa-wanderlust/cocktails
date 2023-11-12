@@ -56,8 +56,8 @@ type CocktailProps = {
 const CocktailDetailed = ({ info }: CocktailProps) => {
   const ingredientsList = handleIngredients(info);
   return (
-    <div className="flex flex-col">
-      <div className="absolute inset-0 overflow-y-hidden opacity-50 w-full h-full">
+    <div className="flex flex-col ">
+      <div className="inset-0 overflow-y-hidden opacity-50 w-full fixed">
         <Image
           src={info.strDrinkThumb}
           alt="backgroundImage"
@@ -75,7 +75,7 @@ const CocktailDetailed = ({ info }: CocktailProps) => {
           />
         </div>
         <div className="flex gap-8">
-          <div className="w-1/3">
+          <div className="min-w-[350px]">
             {info.strDrinkThumb && (
               <div className="border-black border bg-black p-1">
                 <Image

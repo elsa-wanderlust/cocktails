@@ -18,8 +18,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        <div className="p-5">{children}</div>
-        {/* <Footer /> */}
+        <div className="px-10 pt-4 pb-20">{children}</div>
+        <Footer />
       </body>
     </html>
   );

@@ -9,7 +9,7 @@ export default function NotFound() {
         <Image src={backgroundImage} alt="" fill objectFit="cover" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-32 text-center sm:py-12 lg:px-8 z-20">
+      <div className="mx-auto max-w-7xl px-6 py-8 text-center z-20">
         <p className="text-base font-semibold leading-8 text-white">404</p>
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
           Page not found

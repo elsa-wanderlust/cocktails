@@ -7,7 +7,6 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import ModalFrame from "./Modal/ModalFrame";
 import backgroundImage from "../images/header_bg.jpg";
-import { cocktailSearchMenu } from "@/data/topMenuData";
 import { getCookie } from "cookies-next";
 import { useIsConnectedState } from "@/state/modalSelectState";
 
@@ -24,6 +23,17 @@ export default function Example() {
       setIsConnected("none");
     }
   }, [setIsConnected]);
+
+  const cocktailSearchMenu = [
+    {
+      subTitle: "...by name",
+      url: "/searchByName",
+    },
+    {
+      subTitle: "...by ingredient",
+      url: "/searchByIngredient",
+    },
+  ];
 
   return (
     <header className="sticky top-0 z-20">

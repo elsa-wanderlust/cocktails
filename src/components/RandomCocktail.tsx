@@ -1,7 +1,6 @@
 import CocktailDetailed from "./CocktailDetailed";
 
 const randomCocktail = async () => {
-  console.log("called");
   try {
     const res = await fetch(
       `https://www.thecocktaildb.com/api/json/v1/1/random.php`,
