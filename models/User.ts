@@ -32,9 +32,9 @@ const userSchema = new Schema({
         type: String,
         required: true,
       },
-      note: {
-        type: String,
-      },
+      // note: {
+      //   type: String,
+      // },
     },
   ],
 });

@@ -1,15 +1,12 @@
+import { CocktailCardProps } from "@/shapes";
 import Image from "next/image";
 import Link from "next/link";
 
-type CocktailCardProps = {
-  info: {
-    idDrink: string;
-    strDrink: string;
-    strDrinkThumb?: string;
-  };
+type CocktailCardInfoProps = {
+  info: CocktailCardProps;
 };
 
-const CocktailCard = ({ info }: CocktailCardProps) => {
+const CocktailCard = ({ info }: CocktailCardInfoProps) => {
   return (
     <Link
       href={`/cocktail/${info.idDrink}`}

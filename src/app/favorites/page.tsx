@@ -3,18 +3,11 @@
 import { useEffect, useState } from "react";
 
 import CocktailCard from "@/components/CocktailCard";
+import { CocktailCardProps } from "@/shapes";
 import { getCookie } from "cookies-next";
 
-type FavDrinks = {
-  idDrink: string;
-  strDrink: string;
-  note: string;
-  _id: string;
-  strDrinkThumb: string;
-};
-
 const FavoriteCocktails = () => {
-  const [favDrinks, setFavDrinks] = useState<FavDrinks[]>([]);
+  const [favDrinks, setFavDrinks] = useState<CocktailCardProps[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
