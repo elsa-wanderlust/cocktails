@@ -8,7 +8,6 @@ type CocktailIdPageProps = {
 };
 
 const getCocktailDetails = async (req: string) => {
-  console.log("-----req", req);
   try {
     const res = await fetch(
       `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${req}`
