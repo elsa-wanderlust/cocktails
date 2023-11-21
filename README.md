@@ -45,4 +45,4 @@ open `http://localhost:3000` in your browser
 
 ## STATUS 📶
 
-in progress
+project in progress
