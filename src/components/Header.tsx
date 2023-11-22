@@ -55,22 +55,24 @@ export default function Header() {
         aria-label="Global"
       >
         {isConnected === "" ? null : (
-          <div>
-            <div className="md:hidden z-30 flex gap-24 text-lime-200">
+          <>
+            <div className="md:hidden z-30 flex text-lime-200">
               <Image
                 src={burgerIcon}
                 alt="burger menu icon"
                 width={40}
                 height={40}
-                className="object-contain text-lime-200 hover:cursor-pointer"
+                className="object-contain text-lime-200 hover:cursor-pointer "
                 onClick={() => {
                   setIsBurgerMenuOpen(true);
                 }}
               />
-              <h1>COCKTAILS</h1>
+              <div className="flex-1 justify-center flex">
+                <h1>COCKTAILS</h1>
+              </div>
             </div>
 
-            <div className="md:flex hidden mx-auto  max-w-7xl items-center justify-between h-full">
+            <div className="md:flex hidden mx-auto  max-w-7xl items-center justify-between h-full border-2 border-red-500">
               <div className="flex w-3/12 ">
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">Your Company</span>
@@ -152,7 +154,7 @@ export default function Header() {
                 {isConnected === "none" ? "Login / Sign up" : "Logout"}
               </p>
             </div>
-          </div>
+          </>
         )}
       </nav>
       <ModalFrame

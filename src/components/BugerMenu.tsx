@@ -4,9 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import Image from "next/image";
 import ModalFrame from "./Modal/ModalFrame";
-import backgroundImage from "../images/header_bg.jpg";
 import { getCookie } from "cookies-next";
 import { useIsConnectedState } from "@/state/modalSelectState";
 
