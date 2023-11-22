@@ -31,9 +31,10 @@ open `http://localhost:3000` in your browser
 
 ![search cocktails page](./src/images/screenshots/SearchCocktails.png)
 
-- create an account
+- create an account, login, logout with **React Hook Form** and **zod**
 
-![create account modal](./src/images/screenshots/Signin.png)
+![create account modal](./src/images/screenshots/Signup.png)
+![create account modal](./src/images/screenshots/SignupError.png)
 
 - if logged in, can save cocktails as favorite
 

@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
-import ModalFrame from "./Modal/ModalFrame";
+import ModalFrame from "../Modal/ModalFrame";
 import { getCookie } from "cookies-next";
-import loveIconBlack from "../images/icons/loveBlack.svg";
-import loveIconRed from "../images/icons/loveRed.svg";
+import loveIconBlack from "../../images/icons/loveBlack.svg";
+import loveIconRed from "../../images/icons/loveRed.svg";
 
 type CocktailProps = {
   idDrink: string;

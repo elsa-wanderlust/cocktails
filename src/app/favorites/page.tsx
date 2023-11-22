@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import CocktailCard from "@/components/CocktailCard";
+import CocktailCard from "@/components/Cocktails/CocktailCard";
 import { CocktailCardProps } from "@/shapes";
 import { getCookie } from "cookies-next";
 

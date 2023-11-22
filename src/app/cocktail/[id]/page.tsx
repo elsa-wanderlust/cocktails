@@ -1,4 +1,4 @@
-import CocktailDetailed from "@/components/CocktailDetailed";
+import CocktailDetailed from "@/components/Cocktails/CocktailDetailed";
 import { notFound } from "next/navigation";
 
 type CocktailIdPageProps = {

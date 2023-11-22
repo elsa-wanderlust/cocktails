@@ -1,7 +1,7 @@
 "use client";
 
 // import Checkboxes from "./Checkboxes";
-import CocktailCard from "../CocktailCard";
+import CocktailCard from "../Cocktails/CocktailCard";
 import { CocktailProps } from "@/shapes";
 import Loader from "../Loader";
 import SearchField from "./SearchField";
