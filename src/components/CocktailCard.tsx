@@ -6,7 +6,7 @@ type CocktailCardInfoProps = {
   info: CocktailCardProps;
 };
 
-const CocktailCard = ({ info }: CocktailCardInfoProps) => {
+export default function CocktailCard({ info }: CocktailCardInfoProps) {
   return (
     <Link
       href={`/cocktail/${info.idDrink}`}
@@ -28,6 +28,4 @@ const CocktailCard = ({ info }: CocktailCardInfoProps) => {
       </div>
     </Link>
   );
-};
-
-export default CocktailCard;
+}

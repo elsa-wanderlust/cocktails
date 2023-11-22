@@ -13,16 +13,11 @@ const randomCocktail = async () => {
   }
 };
 
-export const RandomCocktail = async () => {
+export default async function RandomCocktail() {
   const cocktailOfTheDay = await randomCocktail();
   return (
     <div>
-      {/* <div className="flex justify-center">
-        <h4 className="border-double border-black border-y-2 p-1 w-fit italic m-0.5 z-10">
-          ~ a random cocktail picked for you ~
-        </h4>
-      </div> */}
       <CocktailDetailed info={cocktailOfTheDay} pageOrigin="h" />
     </div>
   );
-};
+}

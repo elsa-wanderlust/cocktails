@@ -3,9 +3,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 
 import { Fragment } from "react";
-import { Login } from "./Login";
-import { Logout } from "./Logout";
-import { Signup } from "./Signup";
+import Login from "./Login";
+import Logout from "./Logout";
+import Signup from "./Signup";
 import { useIsConnectedState } from "@/state/modalSelectState";
 import { useState } from "react";
 

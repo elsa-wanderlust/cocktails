@@ -30,7 +30,7 @@ const navigation = [
   },
 ];
 
-const Footer = () => {
+export default function Footer() {
   return (
     <div className="p-6 md:flex md:items-center md:justify-between lg:px-8 bg-black fixed bottom-0 w-screen h-6 z-20">
       <div className="flex justify-center space-x-6 md:order-2">
@@ -49,11 +49,9 @@ const Footer = () => {
       </div>
       <div className="mt-8 md:order-1 md:mt-0">
         <p className="text-center text-xs leading-5 text-gray-500">
-          Made by Elsa L. with Next.js 13 and TypeScript
+          Made by Elsa L. with Next.js 13, TypeScript and Tailwind
         </p>
       </div>
     </div>
   );
-};
-
-export default Footer;
+}

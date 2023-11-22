@@ -8,7 +8,7 @@ type LogoutProps = {
   closeModal: () => void;
 };
 
-export const Logout = ({ closeModal }: LogoutProps) => {
+export default function Logout({ closeModal }: LogoutProps) {
   const { setIsConnected } = useIsConnectedState();
 
   const logout = () => {
@@ -55,4 +55,4 @@ export const Logout = ({ closeModal }: LogoutProps) => {
       </div>
     </div>
   );
-};
+}

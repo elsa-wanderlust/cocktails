@@ -19,7 +19,7 @@ type SignupProps = {
 
 type TSignupFormSchema = z.infer<typeof signupFormSchema>;
 
-export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
+export default function Signup({ closeModal, setModalSelect }: SignupProps) {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confPasswordVisible, setConfPasswordVisible] = useState(false);
   const { setIsConnected } = useIsConnectedState();
@@ -167,4 +167,4 @@ export const Signup = ({ closeModal, setModalSelect }: SignupProps) => {
       </div>
     </div>
   );
-};
+}

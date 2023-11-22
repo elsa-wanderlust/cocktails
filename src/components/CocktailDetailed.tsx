@@ -8,7 +8,7 @@ type oneCocktailProps = {
   pageOrigin?: string;
 };
 
-const CocktailDetailed = ({ info }: oneCocktailProps) => {
+export default function CocktailDetailed({ info }: oneCocktailProps) {
   const ingredientsList = handleIngredients(info);
   return (
     <div className="flex flex-col ">
@@ -119,6 +119,4 @@ const CocktailDetailed = ({ info }: oneCocktailProps) => {
       </div>
     </div>
   );
-};
-
-export default CocktailDetailed;
+}

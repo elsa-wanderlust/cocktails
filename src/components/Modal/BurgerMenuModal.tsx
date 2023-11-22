@@ -4,9 +4,9 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import BurgerMenu from "../BugerMenu";
 import { Fragment } from "react";
-import { Login } from "./Login";
-import { Logout } from "./Logout";
-import { Signup } from "./Signup";
+import Login from "./Login";
+import Logout from "./Logout";
+import Signup from "./Signup";
 import { useIsConnectedState } from "@/state/modalSelectState";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ type ModalProps = {
   closeModal: () => void;
 };
 
-const BurgerMenuModal = ({ modalOpen, closeModal }: ModalProps) => {
+export default function BurgerMenuModal({ modalOpen, closeModal }: ModalProps) {
   const { isConnected } = useIsConnectedState();
 
   return (
@@ -58,6 +58,4 @@ const BurgerMenuModal = ({ modalOpen, closeModal }: ModalProps) => {
       </Transition>
     </>
   );
-};
-
-export default BurgerMenuModal;
+}

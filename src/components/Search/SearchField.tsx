@@ -16,11 +16,11 @@ type SearchFieldProps = {
   setData: React.Dispatch<React.SetStateAction<CocktailProps[]>>;
 };
 
-const SearchField = ({
+export default function SearchField({
   searchPage,
   setIsLoading,
   setData,
-}: SearchFieldProps) => {
+}: SearchFieldProps) {
   const searchParams = useSearchParams();
   const input = searchParams.get(searchPage);
   const router = useRouter();
@@ -66,5 +66,4 @@ const SearchField = ({
       />
     </div>
   );
-};
-export default SearchField;
+}

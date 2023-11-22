@@ -14,11 +14,11 @@ type CocktailProps = {
   strDrinkThumb: string;
 };
 
-const FavortiesIcons = ({
+export default function FavortiesIcons({
   idDrink,
   strDrink,
   strDrinkThumb,
-}: CocktailProps) => {
+}: CocktailProps) {
   const [isDrinkFav, setIsDrinkFav] = useState(false);
   const [modalOpen, setmodalOpen] = useState(false);
 
@@ -93,6 +93,4 @@ const FavortiesIcons = ({
       />
     </div>
   );
-};
-
-export default FavortiesIcons;
+}

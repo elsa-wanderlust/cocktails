@@ -17,7 +17,7 @@ type LoginProps = {
 };
 type TLoginFormSchema = z.infer<typeof loginFormSchema>;
 
-export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
+export default function Login({ closeModal, setModalSelect }: LoginProps) {
   const { setIsConnected } = useIsConnectedState();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -133,4 +133,4 @@ export const Login = ({ closeModal, setModalSelect }: LoginProps) => {
       </div>
     </div>
   );
-};
+}
