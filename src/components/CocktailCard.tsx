@@ -18,8 +18,8 @@ const CocktailCard = ({ info }: CocktailCardInfoProps) => {
             src={info.strDrinkThumb}
             alt={`image of a cocktail: ${info.strDrink}`}
             fill
-            objectFit="cover"
             loading="lazy"
+            className="object-cover"
           />
         )}
         <div className="backdrop-brightness-75 w-full absolute bottom-2">

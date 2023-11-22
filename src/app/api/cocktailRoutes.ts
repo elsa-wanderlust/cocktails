@@ -10,7 +10,11 @@ export async function fetchResults(req: string, searchType: string) {
       }.php?${searchType}=${req}`
     );
     const data = await res.json();
-    return data.drinks;
+    if (!data) {
+      throw new Error("there are no cocktails matching you search");
+    } else {
+      return data.drinks;
+    }
   } catch (error) {
     console.log(error);
   }

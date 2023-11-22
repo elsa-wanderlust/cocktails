@@ -18,7 +18,7 @@ const CocktailDetailed = ({ info }: oneCocktailProps) => {
           src={info.strDrinkThumb}
           alt="backgroundImage"
           fill
-          objectFit="cover"
+          className="object-cover"
         />
       </div>
       <div className="z-10">
@@ -40,7 +40,7 @@ const CocktailDetailed = ({ info }: oneCocktailProps) => {
                 <Image
                   src={info.strDrinkThumb}
                   alt={`image of a cocktail: ${info.strDrink}`}
-                  objectFit="contain"
+                  className="object-contain"
                   height="400"
                   width="400"
                   style={{ borderRadius: "10%" }}

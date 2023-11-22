@@ -46,7 +46,7 @@ export default function Header() {
           src={backgroundImage}
           alt="backgroundImage"
           fill
-          objectFit="cover"
+          className="object-cover"
         />
       </div>
 
@@ -72,7 +72,7 @@ export default function Header() {
               </div>
             </div>
 
-            <div className="md:flex hidden mx-auto  max-w-7xl items-center justify-between h-full border-2 border-red-500">
+            <div className="md:flex hidden mx-auto  max-w-7xl items-center justify-between h-full">
               <div className="flex w-3/12 ">
                 <a href="#" className="-m-1.5 p-1.5">
                   <span className="sr-only">Your Company</span>
