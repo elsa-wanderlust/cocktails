@@ -60,9 +60,10 @@ export default function SearchField({
         placeholder={`type the first 3 letters of a cocktail ${
           searchPage === "s" ? "name" : "ingredient"
         }`}
-        className="block rounded-md border-0 px-5 w-full sm:w-1/2 md:w-1/3 py-1.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:border-green-700 focus:ring-green-700 text-xs lg:text-sm sm:leading-6"
+        className="block rounded-md border-0 px-5 w-full sm:w-1/2 md:w-1/3 py-1.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-700 text-xs lg:text-sm sm:leading-6 focus:outline-none"
         onChange={handleInput}
         value={input ? input : ""}
+        autoFocus
       />
     </div>
   );
