@@ -43,7 +43,3 @@ open `http://localhost:3000` in your browser
 - if logged in, can see all the cocktails saved as favorite
 
 ![favorite cocktails](./src/images/screenshots/Favorites.png)
-
-## STATUS 📶
-
-project in progress
