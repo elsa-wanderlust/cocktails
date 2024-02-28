@@ -2,6 +2,7 @@ export interface Square {
   type: "square";
   side: number;
 }
+console.log("helllllloooo");
 
 export type CocktailCardProps = {
   idDrink: string;
