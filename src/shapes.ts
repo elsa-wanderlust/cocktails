@@ -3,6 +3,8 @@ export interface Square {
   side: number;
 }
 console.log("helllllloooo");
+console.log("helllllloooo");
+console.log("helllllloooo");
 
 export type CocktailCardProps = {
   idDrink: string;
